@@ -66,23 +66,30 @@ YAHOO.util.Event.addListener(window, "load", function() {
 		this._newRecs = [];
 		var recLen = this._records.length;
 		var rec = null;
+		var recIndx = 0;
+		var freezeRec = null;
 		for(var i=0; i<recLen; i++) {
 			rec = this._records[i];
 			if(!rec.freeze) {
 				this._newRecs.push(rec);
 			} else {
+				if(i<1) {
+					recIndx = 0;
+				} else {
+					recIndx = 1;
+				}
+				freezeRec = rec;
 				continue;
 			}
 		}
-		console.log("newRecs---");
-		console.log(this._newRecs);
 		this._records = [];
-		console.log("records--");
-		console.log(this._records);
-		this._records = this._newRecs.reverse();
-		console.log("after sort--");
-		console.log(this._records);
-		this._records.push(rec);
+		if(recIndx < 1) {
+			this._records.push(freezeRec);
+			this._records = this._newRecx.reverse();
+		} else {
+			this._records = this._newRecs.reverse();
+			this._records.push(rec);
+		}
 		return this._records;
 	};
     YAHOO.example.Basic = function() {
