@@ -77,7 +77,9 @@ YAHOO.util.Event.addListener(window, "load", function() {
 		}
 		//console.log(this._newRecs);
 		console.log(this._newRecs.reverse());
-		return this._newRecs.reverse();
+		this._records = this._newRecs.reverse();
+		this._records.push(rec);
+		return this._records;
 	};
     YAHOO.example.Basic = function() {
 		var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
