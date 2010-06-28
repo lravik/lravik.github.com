@@ -56,7 +56,6 @@ body {
 YAHOO.util.Event.addListener(window, "load", function() {
 	YAHOO.widget.RecordSet.prototype.sortRecords = function (fnSort, desc, field) {
 		return this._records.sort(function(a, b) {
-			console.log(a.freeze+"--"+b.freeze);
 			if(a.freeze || b.freeze) {
 				return false;
 			}
@@ -65,12 +64,22 @@ YAHOO.util.Event.addListener(window, "load", function() {
 	};
 	YAHOO.widget.RecordSet.prototype.reverseRecords = function() {
 		console.log('inside reverse function');
+		var this._newRecs = [];
+		var recLen = this._records.length;
+		var rec = null;
+		for(var i=0; i<recLen; i++) {
+			rec = this._records[i];
+			if(!rec.freeze) {
+				this._newRecs.push(rec);
+			} else {
+				continue;
+			}
+		}
+		console.log(this._newRecs);
 		return this._records.reverse();
 	};
     YAHOO.example.Basic = function() {
 		var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
-			//console.log('here i am');
-			//console.log(oData);
 			if(oData.toString() === 'po-1482') {				
 				oRecord.freeze = true;
 			}
