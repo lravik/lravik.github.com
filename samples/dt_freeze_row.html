@@ -76,7 +76,9 @@ YAHOO.util.Event.addListener(window, "load", function() {
 				}
 			}
 		}
-		console.log("newRecs---"+this._newRecs);
+		console.log("newRecs---");
+		console.log(this._newRecs);
+		this._records = {};
 		this._records = this._newRecs.reverse();
 		console.log(this._records);
 		this._records.push(rec);
