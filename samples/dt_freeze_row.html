@@ -63,7 +63,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 		});
 	};
 	YAHOO.widget.RecordSet.prototype.reverseRecords = function() {
-		if(this._newRecs) {
+		if(!this._newRecs) {
 			this._newRecs = new Array();
 			var recLen = this._records.length;
 			var rec = null;
