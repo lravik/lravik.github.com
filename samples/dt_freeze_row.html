@@ -63,17 +63,20 @@ YAHOO.util.Event.addListener(window, "load", function() {
 		});
 	};
 	YAHOO.widget.RecordSet.prototype.reverseRecords = function() {
-		this._newRecs = new Array();
-		var recLen = this._records.length;
-		var rec = null;
-		for(var i=0; i<recLen; i++) {
-			rec = this._records[i];
-			if(!rec.freeze) {
-				this._newRecs.push(rec);
-			} else {
-				continue;
+		if(this._newRecs) {
+			this._newRecs = new Array();
+			var recLen = this._records.length;
+			var rec = null;
+			for(var i=0; i<recLen; i++) {
+				rec = this._records[i];
+				if(!rec.freeze) {
+					this._newRecs.push(rec);
+				} else {
+					continue;
+				}
 			}
 		}
+		console.log("newRecs---"+this._newRecs);
 		this._records = this._newRecs.reverse();
 		console.log(this._records);
 		this._records.push(rec);
