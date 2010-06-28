@@ -63,7 +63,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 		});
 	};
 	YAHOO.widget.RecordSet.prototype.reverseRecords = function() {
-		console.log('inside reverse function');
+		//console.log('inside reverse function');
 		this._newRecs = new Array();
 		var recLen = this._records.length;
 		var rec = null;
@@ -75,8 +75,8 @@ YAHOO.util.Event.addListener(window, "load", function() {
 				continue;
 			}
 		}
-		console.log(this._newRecs);
-		return this._records.reverse();
+		//console.log(this._newRecs);
+		return this._newRecs.reverse();
 	};
     YAHOO.example.Basic = function() {
 		var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
