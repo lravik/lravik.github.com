@@ -94,6 +94,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 	};
     YAHOO.example.Basic = function() {
 		var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
+			console.log(elLiner);
 			if(oData.toString() === 'po-1482') {				
 				oRecord.freeze = true;
 			}
