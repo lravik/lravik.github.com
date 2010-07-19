@@ -34,8 +34,8 @@ body {
 
 /**** Style to apply for freeze row ****/
 .freeze-prop {
-	color: #fff;
-	background-color: purple;
+	color: #000;
+	background-color:#EEDDFF;
 }
 
 </style>
@@ -103,8 +103,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 		var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
 			if(oData.toString() === 'po-1482') {				
 				oRecord.freeze = true;
-				console.log(oRecord.getId());
-				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
+//				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
 			}
 			elLiner.innerHTML = oData;
 		};
