@@ -31,6 +31,13 @@ body {
 <style type="text/css">
 /* custom styles for this example */
 .yui-skin-sam .yui-dt-liner { white-space:nowrap; } 
+
+/**** Style to apply for freeze row ****/
+.freeze-prop {
+	color: #fff;
+	background-color: purple;
+}
+
 </style>
 
 <!--end custom header content for this example-->
@@ -94,9 +101,10 @@ YAHOO.util.Event.addListener(window, "load", function() {
 	};
     YAHOO.example.Basic = function() {
 		var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
-			console.log(elLiner);
 			if(oData.toString() === 'po-1482') {				
 				oRecord.freeze = true;
+				console.log(oRecord.getId());
+				YAHOO.util.Dom.addClass(oRecord.getId(), "freeze-prop");
 			}
 			elLiner.innerHTML = oData;
 		};
