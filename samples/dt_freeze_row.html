@@ -104,7 +104,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 			if(oData.toString() === 'po-1482') {				
 				oRecord.freeze = true;
 				console.log(oRecord.getId());
-				YAHOO.util.Dom.addClass(oRecord.getId(), "freeze-prop");
+				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
 			}
 			elLiner.innerHTML = oData;
 		};
