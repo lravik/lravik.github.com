@@ -35,7 +35,8 @@ body {
 /**** Style to apply for freeze row ****/
 .yui-dt-freeze {
 	color: #000;
-	background-color:#EEDDFF;
+	background-color:#EEDDFF !important;
+	font-weight: bold;
 }
 
 </style>
@@ -127,14 +128,12 @@ YAHOO.util.Event.addListener(window, "load", function() {
                 myColumnDefs, myDataSource, {caption:"DataTable Caption"});
         myDataTable.subscribe("renderEvent", function() {
 			var recSet = myDataTable.getRecordSet();
-			console.log(recSet);
 			var freezeClass = function (el) {
-				console.log(el);
 				if(el.freeze) {
 					YAHOO.util.Dom.addClass(el.getId(), "yui-dt-freeze");
 				}
 			};
-			recSet.forEach(freezeClass);
+			(recSet._records).forEach(freezeClass);
 		});
         //myDataTable.subscribe("")
         return {
