@@ -127,14 +127,14 @@ YAHOO.util.Event.addListener(window, "load", function() {
                 myColumnDefs, myDataSource, {caption:"DataTable Caption"});
         myDataTable.subscribe("renderEvent", function() {
 			var recSet = myDataTable.getRecordSet();
-			var freezeClass = function(el) {
+			var freezeClass = function (el) {
 				console.log(el);
 				if(el.freeze) {
 					YAHOO.util.Dom.addClass(el.getId(), "yui-dt-freeze");
 				}
 			};
 			recSet.forEach(freezeClass);
-		};
+		});
         //myDataTable.subscribe("")
         return {
             oDS: myDataSource,
