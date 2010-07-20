@@ -33,7 +33,7 @@ body {
 .yui-skin-sam .yui-dt-liner { white-space:nowrap; } 
 
 /**** Style to apply for freeze row ****/
-.freeze-prop {
+.yui-dt-freeze {
 	color: #000;
 	background-color:#EEDDFF;
 }
@@ -105,6 +105,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
 				oRecord.freeze = true;
 //				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
 			}
+			console.log(elLiner);
 			elLiner.innerHTML = oData;
 		};
 		YAHOO.widget.DataTable.freezeFormat = rowFormatter;
