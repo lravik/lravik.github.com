@@ -105,7 +105,8 @@ YAHOO.util.Event.addListener(window, "load", function() {
 				oRecord.freeze = true;
 //				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
 			}
-			console.log(YAHOO.util.Dom.getElementById(oRecord.getId()));
+			console.log(oRecord);
+			console.log(YAHOO.util.Dom.get(oRecord.getId()));
 			elLiner.innerHTML = oData;
 		};
 		YAHOO.widget.DataTable.freezeFormat = rowFormatter;
