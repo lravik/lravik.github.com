@@ -105,8 +105,6 @@ YAHOO.util.Event.addListener(window, "load", function() {
 				oRecord.freeze = true;
 //				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
 			}
-			console.log(oRecord._sId);
-			console.log(YAHOO.util.Dom.get("yui-rec0"));
 			elLiner.innerHTML = oData;
 		};
 		YAHOO.widget.DataTable.freezeFormat = rowFormatter;
@@ -127,7 +125,16 @@ YAHOO.util.Event.addListener(window, "load", function() {
 
         var myDataTable = new YAHOO.widget.DataTable("basic",
                 myColumnDefs, myDataSource, {caption:"DataTable Caption"});
-        
+        myDataTable.subscribe("renderEvent", function() {
+			var recSet = myDataTable.getRecordSet();
+			var freezeClass = function(el) {
+				console.log(el);
+				if(el.freeze) {
+					YAHOO.util.Dom.addClass(el.getId(), "yui-dt-freeze");
+				}
+			};
+			recSet.forEach(freezeClass);
+		};
         //myDataTable.subscribe("")
         return {
             oDS: myDataSource,
