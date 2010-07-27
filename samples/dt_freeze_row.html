@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>Basic Example for Freeze row sorting</title>
 
 <style type="text/css">
@@ -12,8 +12,8 @@
   we turn them off as a foundation for YUI
   CSS treatments. */
 body {
-	margin:0;
-	padding:0;
+margin:0;
+padding:0;
 }
 </style>
 
@@ -34,9 +34,9 @@ body {
 
 /**** Style to apply for freeze row ****/
 .yui-dt-freeze {
-	color: #fff;
-	background-color:#7D3883 !important;
-	font-weight: bold;
+    color: #fff;
+    background-color:#7D3883 !important;
+    font-weight: bold;
 }
 
 .yui-dt-freeze td.yui-dt-asc,
@@ -56,8 +56,8 @@ body {
 <h1>Basic Example</h1>
 
 <div class="exampleIntro">
-	<p>A demonstration of the DataTable's basic feature set.</p>
-			
+<p>A demonstration of the DataTable's basic feature set.</p>
+
 </div>
 
 <!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
@@ -66,55 +66,75 @@ body {
 
 <script type="text/javascript" src="http://developer.yahoo.com/yui/examples/datatable/assets/js/data.js"></script>
 <script type="text/javascript">
+(function () {
+    var lang = YAHOO.lang,
+        util = YAHOO.util,
+        widget = YAHOO.widget,
+        Dom = util.Dom,
+        Ev = util.Event,
+        DT = widget.DataTable;
+
+    if(typeof DTFreeze === "undefined") {
+        DTFreeze = function(el, userConfig) {
+            if(arguments.length > 0) {
+                DTFreeze.superclass.construtor.call(this, el, userConfig);
+            }
+        };
+    }
+    
+
+})();
+
+
 YAHOO.util.Event.addListener(window, "load", function() {
-	YAHOO.widget.RecordSet.prototype.sortRecords = function (fnSort, desc, field) {
-		return this._records.sort(function(a, b) {
-			if(a.freeze || b.freeze) {
-				return false;
-			}
-			return fnSort(a, b, desc, field);
-		});
-	};
-	YAHOO.widget.RecordSet.prototype.reverseRecords = function() {
-		this._newRecs = [];
-		var recLen = this._records.length;
-		var rec = null;
-		var recIndx = 0;
-		var freezeRec = null;
-		for(var i=0; i<recLen; i++) {
-			rec = this._records[i];
-			if(!rec.freeze) {
-				this._newRecs.push(rec);
-			} else {
-				if(i<1) {
-					recIndx = 0;
-				} else {
-					recIndx = 1;
-				}
-				freezeRec = rec;
-				continue;
-			}
-		}
-		this._records = [];
-		if(recIndx < 1) {
-			this._records.push(freezeRec);
-			this._records = this._newRecx.reverse();
-		} else {
-			this._records = this._newRecs.reverse();
-			this._records.push(rec);
-		}
-		return this._records;
-	};
+    YAHOO.widget.RecordSet.prototype.sortRecords = function (fnSort, desc, field) {
+    return this._records.sort(function(a, b) {
+        if(a.freeze || b.freeze) {
+            return false;
+        }
+        return fnSort(a, b, desc, field);
+        });
+    };
+    YAHOO.widget.RecordSet.prototype.reverseRecords = function() {
+        this._newRecs = [];
+        var recLen = this._records.length;
+        var rec = null;
+        var recIndx = 0;
+        var freezeRec = null;
+        for(var i=0; i<recLen; i++) {
+            rec = this._records[i];
+            if(!rec.freeze) {
+                this._newRecs.push(rec);
+            } else {
+                if(i<1) {
+                    recIndx = 0;
+                } else {
+                    recIndx = 1;
+                }
+                freezeRec = rec;
+                continue;
+            }
+        }
+        this._records = [];
+        if(recIndx < 1) {
+            this._records.push(freezeRec);
+            this._records = this._newRecx.reverse();
+        } else {
+            this._records = this._newRecs.reverse();
+            this._records.push(rec);
+        }
+        return this._records;
+    };
     YAHOO.example.Basic = function() {
-		var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
-			if(oData.toString() === 'po-1482') {				
-				oRecord.freeze = true;
-//				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
-			}
-			elLiner.innerHTML = oData;
-		};
-		YAHOO.widget.DataTable.freezeFormat = rowFormatter;
-		
+        var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
+            if(oData.toString() === 'po-1482') {				
+                oRecord.freeze = true;
+                //				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
+            }
+            elLiner.innerHTML = oData;
+        };
+        YAHOO.widget.DataTable.freezeFormat = rowFormatter;
+
         var myColumnDefs = [
             {key:"id", sortable:true, resizeable:true,formatter:YAHOO.widget.DataTable.freezeFormat},
             {key:"date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, sortOptions:{defaultDir:YAHOO.widget.DataTable.CLASS_DESC},resizeable:true},
@@ -129,17 +149,16 @@ YAHOO.util.Event.addListener(window, "load", function() {
             fields: ["id","date","quantity","amount","title"]
         };
 
-        var myDataTable = new YAHOO.widget.DataTable("basic",
-                myColumnDefs, myDataSource, {caption:"DataTable Caption"});
+        var myDataTable = new YAHOO.widget.DataTable("basic", myColumnDefs, myDataSource, {caption:"DataTable Caption"});
         myDataTable.subscribe("renderEvent", function() {
-			var recSet = myDataTable.getRecordSet();
-			var freezeClass = function (el) {
-				if(el.freeze) {
-					YAHOO.util.Dom.addClass(el.getId(), "yui-dt-freeze");
-				}
-			};
-			(recSet._records).forEach(freezeClass);
-		});
+            var recSet = myDataTable.getRecordSet();
+            var freezeClass = function (el) {
+                if(el.freeze) {
+                    YAHOO.util.Dom.addClass(el.getId(), "yui-dt-freeze");
+                }
+            };
+            (recSet._records).forEach(freezeClass);
+        });
         //myDataTable.subscribe("")
         return {
             oDS: myDataSource,
