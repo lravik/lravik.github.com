@@ -19,10 +19,12 @@ padding:0;
 
 <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/fonts/fonts-min.css" />
 <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/datatable/assets/skins/sam/datatable.css" />
-<script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/2.8.1/build/logger/assets/skins/sam/logger.css">
 
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/dragdrop/dragdrop-min.js"></script>
 <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/element/element-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/logger/logger-min.js"></script>
 <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/datasource/datasource-min.js"></script>
 <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/datatable/datatable-min.js"></script>
 
@@ -81,12 +83,34 @@ padding:0;
             }
         };
     }
+    YAHOO.extend(DTFreeze, YAHOO.widget.RecordSet);
+
+    //Here are the configuration parameters for Freeze row and freeze columns
+    DTFreeze.freezeRow = false;
+    DTFreeze.freezeCol = -1;
+
+    //Function to validate Freeze row index
+    DTFreeze.validateFreezingRow = function(oRecord) {
+        console.log(oRecord);
+    };
+
+    DTFreeze.sortRecords = function (fnSort, desc, field) {
+        return this._records.sort(function(a, b) {
+            if(a.freeze || b.freeze) {
+                return false;
+            }
+            return fnSort(a, b, desc, field);
+        });
+    };
     
 
 })();
 
 
 YAHOO.util.Event.addListener(window, "load", function() {
+    //Initializing log window
+    var myLogReader = new YAHOO.widget.LogReader();
+    
     YAHOO.widget.RecordSet.prototype.sortRecords = function (fnSort, desc, field) {
     return this._records.sort(function(a, b) {
         if(a.freeze || b.freeze) {
@@ -126,17 +150,22 @@ YAHOO.util.Event.addListener(window, "load", function() {
         return this._records;
     };
     YAHOO.example.Basic = function() {
-        var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
-            if(oData.toString() === 'po-1482') {				
+        //var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
+        var rowFormatter = function (args) {
+            console.log(args);
+            YAHOO.log("arguments -- "+args);
+            //var indx = myDataTable.getRecordIndex(oRecord);
+            //YAHOO.log(indx);
+            /*if(oData.toString() === 'po-1482') {				
                 oRecord.freeze = true;
                 //				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
             }
-            elLiner.innerHTML = oData;
+            elLiner.innerHTML = oData;*/
         };
         YAHOO.widget.DataTable.freezeFormat = rowFormatter;
 
         var myColumnDefs = [
-            {key:"id", sortable:true, resizeable:true,formatter:YAHOO.widget.DataTable.freezeFormat},
+            {key:"id", sortable:true, resizeable:true},
             {key:"date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, sortOptions:{defaultDir:YAHOO.widget.DataTable.CLASS_DESC},resizeable:true},
             {key:"quantity", formatter:YAHOO.widget.DataTable.formatNumber, sortable:true, resizeable:true},
             {key:"amount", formatter:YAHOO.widget.DataTable.formatCurrency, sortable:true, resizeable:true},
@@ -149,7 +178,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
             fields: ["id","date","quantity","amount","title"]
         };
 
-        var myDataTable = new YAHOO.widget.DataTable("basic", myColumnDefs, myDataSource, {caption:"DataTable Caption"});
+        var myDataTable = new YAHOO.widget.DataTable("basic", myColumnDefs, myDataSource, {caption:"DataTable Caption", formatRow: YAHOO.widget.DataTable.freezeFormat});
         myDataTable.subscribe("renderEvent", function() {
             var recSet = myDataTable.getRecordSet();
             var freezeClass = function (el) {
