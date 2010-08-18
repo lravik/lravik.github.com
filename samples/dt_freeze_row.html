@@ -68,7 +68,7 @@ padding:0;
 
 <script type="text/javascript" src="http://developer.yahoo.com/yui/examples/datatable/assets/js/data.js"></script>
 <script type="text/javascript">
-(function () {
+/*(function () {
     var lang = YAHOO.lang,
         util = YAHOO.util,
         widget = YAHOO.widget,
@@ -105,11 +105,11 @@ padding:0;
     
 
 })();
-
+*/
 
 YAHOO.util.Event.addListener(window, "load", function() {
     //Initializing log window
-    var myLogReader = new YAHOO.widget.LogReader();
+    //var myLogReader = new YAHOO.widget.LogReader();
     
     YAHOO.widget.RecordSet.prototype.sortRecords = function (fnSort, desc, field) {
     return this._records.sort(function(a, b) {
@@ -150,22 +150,22 @@ YAHOO.util.Event.addListener(window, "load", function() {
         return this._records;
     };
     YAHOO.example.Basic = function() {
-        //var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
-        var rowFormatter = function (args) {
-            console.log(args);
-            YAHOO.log("arguments -- "+args);
+        var rowFormatter = function (elLiner, oRecord, oColumn, oData) {
+        //var rowFormatter = function (args) {
+            //console.log(args);
+            //YAHOO.log("arguments -- "+args);
             //var indx = myDataTable.getRecordIndex(oRecord);
             //YAHOO.log(indx);
-            /*if(oData.toString() === 'po-1482') {				
+            if(oData.toString() === 'po-1482') {				
                 oRecord.freeze = true;
                 //				YAHOO.util.Dom.addClass(YAHOO.util.Dom.get(oRecord.getId()), "freeze-prop");
             }
-            elLiner.innerHTML = oData;*/
+            elLiner.innerHTML = oData;
         };
         YAHOO.widget.DataTable.freezeFormat = rowFormatter;
 
         var myColumnDefs = [
-            {key:"id", sortable:true, resizeable:true},
+            {key:"id", sortable:true, resizeable:true, formatter: YAHOO.widget.DataTable.freezeFormat},
             {key:"date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, sortOptions:{defaultDir:YAHOO.widget.DataTable.CLASS_DESC},resizeable:true},
             {key:"quantity", formatter:YAHOO.widget.DataTable.formatNumber, sortable:true, resizeable:true},
             {key:"amount", formatter:YAHOO.widget.DataTable.formatCurrency, sortable:true, resizeable:true},
@@ -178,7 +178,8 @@ YAHOO.util.Event.addListener(window, "load", function() {
             fields: ["id","date","quantity","amount","title"]
         };
 
-        var myDataTable = new YAHOO.widget.DataTable("basic", myColumnDefs, myDataSource, {caption:"DataTable Caption", formatRow: YAHOO.widget.DataTable.freezeFormat});
+        //var myDataTable = new YAHOO.widget.DataTable("basic", myColumnDefs, myDataSource, {caption:"DataTable Caption", formatRow: YAHOO.widget.DataTable.freezeFormat});
+        var myDataTable = new YAHOO.widget.DataTable("basic", myColumnDefs, myDataSource, {caption:"DataTable Caption"});
         myDataTable.subscribe("renderEvent", function() {
             var recSet = myDataTable.getRecordSet();
             var freezeClass = function (el) {
