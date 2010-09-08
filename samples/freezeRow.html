@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Basic Example for Freeze row sorting</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+margin:0;
+padding:0;
+}
+</style>
+
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/datatable/assets/skins/sam/datatable.css" />
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/dragdrop/dragdrop-min.js"></script>
+
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/element/element-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/datasource/datasource-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/datatable/datatable-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+/* custom styles for this example */
+.yui-skin-sam .yui-dt-liner { white-space:nowrap; } 
+
+/**** Style to apply for freeze row ****/
+.yui-dt-freeze {
+    color: #fff;
+    background-color:#7D3883 !important;
+    font-weight: bold;
+}
+
+.yui-dt-freeze td.yui-dt-asc,
+.yui-dt-freeze td.yui-dt-desc {
+    background-color: #7D3883 !important;
+}
+
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class="yui-skin-sam">
+
+
+<h1>Basic Example</h1>
+
+<div class="exampleIntro">
+<p>A demonstration of the DataTable's basic feature set.</p>
+
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div id="basic"></div>
+
+<script type="text/javascript" src="./data.js"></script>
+
+<script type="text/javascript">
+(function () {
+    var lang = YAHOO.lang,
+        util = YAHOO.util,
+        widget = YAHOO.widget,
+        Dom = util.Dom,
+        Ev = util.Event,
+		DT = widget.DataTable;
+	
+	lang.augmentObject(DT, {
+		//Here are the configuration parameters for Freeze row and Freeze Columns
+		freezeRow : false,
+		freezeCol : -1,
+		FREEZE_ROW_CSS : "yui-dt-freeze",
+		formatFreezeRow : function (el, oRecord) {
+			var elIndx = this.getRecordIndex(oRecord), recSetLen = (this.getRecordSet()).getLength(), 
+				elFlag = (elIndx === 0) ? true : (elIndx === (recSetLen-1) ? true : false),
+				uDataFreeze = oRecord.getData('isFreeze'),
+				uDataFlag = (uDataFreeze != undefined && uDataFreeze != "") ? true : false;
+			if(elFlag && uDataFlag) {
+				oRecord.freeze = true;
+				Dom.addClass(el, DT.FREEZE_ROW_CSS);
+			}
+			return true;
+		},
+		validateFreezeRowCol : function (oRecord, oColumn) {
+			var recIndx = DT.getRecordIndex(oRecord);
+		}
+	});
+	lang.augmentObject(DT.Formatter, {
+		freezeRow : DT.formatFreezeRow
+	});
+
+	var RS = widget.RecordSet;
+	lang.augmentObject(RS.prototype, {
+		sortRecords: function (fnSort, desc, field) {
+			return this._records.sort(function(a, b) {
+			if(a.freeze || b.freeze) {
+				return false;
+			}
+				return fnSort(a, b, desc, field);
+			});			
+		},
+		reverseRecords: function() {
+			this._newRecs = [];
+			var recLen = this._records.length;
+			var rec = null;
+			var recIndx = 0;
+			var freezeRec = null;
+			for(var i=0; i<recLen; i++) {
+	    		rec = this._records[i];
+		    	if(!rec.freeze) {
+    		    	this._newRecs.push(rec);
+			    } else {
+			        if(i<1) {
+				        recIndx = 0;
+			        } else {
+				        recIndx = 1;
+			        }
+			        freezeRec = rec;
+			        continue;
+			    }
+			}
+			this._records = [];
+			if(recIndx < 1) {
+				this._records.push(freezeRec);
+				this._records = this._newRecx.reverse();
+			} else {
+				this._records = this._newRecs.reverse();
+				this._records.push(rec);
+			}
+			return this._records;			
+		}
+	}, true);
+
+/*    if(typeof DTFreeze === "undefined") {
+        DTFreeze = function(elContainer, aColumnDefs, oDataSource, oConfigs) {
+			//var DT = widget.DataTable;
+			if(arguments.length > 0) {
+				DTFreeze.superclass.constructor.call(this, elContainer, aColumnDefs, oDataSource, oConfigs);
+			}		
+		};
+		YAHOO.extend(DTFreeze, YAHOO.widget.DataTable);
+
+		lang.augmentObject(DTFreeze, {
+			//Here are the configuration parameters for Freeze row and freeze columns
+			freezeRow : false,
+			freezeCol : -1,
+			FREEZE_ROW_CSS : "yui-dt-freeze",
+			formatFreezeRow : function (el, oRecord, oColumn, oData) {
+				console.log(el);
+				console.log(oRecord);
+				console.log(oColumn);
+				console.log(oData);
+			},
+			validateFreezeRowCol : function (oRecord, oColumn) {
+				var recIndx = DTFreeze.getRecordIndex(oRecord);
+				console.log(recIndx);
+			}
+		});
+
+		DTFreeze.Formatter = {
+			freezeRow : DTFreeze.formatFreezeRow
+		};
+		
+		YAHOO.extend(DTFreeze, YAHOO.widget.DataTable);
+
+		DTFreeze.prototype.render = function () {
+			//DTFreeze.superclass.render.call();
+			console.log(this);
+			console.log(DTFreeze);
+			this.subscribe("beforeRenderEvent", function() {
+				console.log(this);
+			});
+			
+			DTFreeze.freezeRecord = function (oRecord) {
+				var recIndx = widget.RecordSet.getRecordIndex(oRecord);
+				console.log(recIndx);
+			};
+		};*/
+		//YAHOO.extend(DTFreeze, YAHOO.widget.DataTable);
+		//Function to validate Freeze row index
+		/*DTFreeze.validateFreezingRow = function(oRecord) {
+			console.log(oRecord);
+		};
+		
+		DTFreeze.sortRecords = function (fnSort, desc, field) {
+			return this._records.sort(function(a, b) {
+				if(a.freeze || b.freeze) {
+					return false;
+				}
+				return fnSort(a, b, desc, field);
+			});
+		};
+	}*/
+})();
+
+
+YAHOO.util.Event.addListener(window, "load", function() {
+    YAHOO.example.Basic = function() {
+        var myColumnDefs = [
+            {key:"id", sortable:true, resizeable:true},
+            {key:"date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, sortOptions:{defaultDir:YAHOO.widget.DataTable.CLASS_DESC},resizeable:true},
+            {key:"quantity", formatter:YAHOO.widget.DataTable.formatNumber, sortable:true, resizeable:true},
+            {key:"amount", formatter:YAHOO.widget.DataTable.formatCurrency, sortable:true, resizeable:true},
+            {key:"title", sortable:true, resizeable:true}
+        ];
+
+        var myDataSource = new YAHOO.util.DataSource(YAHOO.example.Data.bookorders);
+        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+        myDataSource.responseSchema = {
+            fields: ["id","date","quantity","amount","title","isFreeze"]
+        };
+
+        //var myDataTable = new YAHOO.widget.DataTable("basic", myColumnDefs, myDataSource, {caption:"DataTable Caption"});
+        var myDataTable = new YAHOO.widget.DataTable("basic", myColumnDefs, myDataSource, {caption:"DataTable Caption",formatRow:YAHOO.widget.DataTable.formatFreezeRow});
+        //myDataTable.subscribe("")
+        return {
+            oDS: myDataSource,
+            oDT: myDataTable
+        };
+    }();
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>
