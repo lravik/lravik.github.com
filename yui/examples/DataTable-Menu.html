@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+ <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Context Menu Integration</title>
+
+<style type="text/css">
+body{
+background:url('YUI-Autocomplete-ViewList-Widgets/images/bg_hd.gif');
+background-repeat:repeat-x;
+}
+#myAutoComplete {
+    width:15em; /* set width here or else widget will expand to fit its container */
+    padding-bottom:2em;
+}
+.format-results{
+float:left;width:150px;
+}
+.match{
+font-weight:bold;
+}
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="DataTable-Menu_files/fonts-min.css">
+<link rel="stylesheet" type="text/css" href="DataTable-Menu_files/menu.css">
+<link rel="stylesheet" type="text/css" href="DataTable-Menu_files/datatable.css">
+<script type="text/javascript" src="DataTable-Menu_files/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="DataTable-Menu_files/container_core-min.js"></script>
+<script type="text/javascript" src="DataTable-Menu_files/menu-min.js"></script>
+<script type="text/javascript" src="DataTable-Menu_files/element-min.js"></script>
+<script type="text/javascript" src="DataTable-Menu_files/datasource-min.js"></script>
+<script type="text/javascript" src="DataTable-Menu_files/datatable-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+div.yuimenu .bd {
+    zoom: normal;
+}
+</style>
+
+<!--end custom header content for this example-->
+
+</head><body class="yui-skin-sam"><iframe style="position: absolute; visibility: visible; background-color: transparent; border-width: 0pt; width: 2em; height: 2em; left: 0pt; top: -27px;" title="Text Resize Monitor" id="_yuiResizeMonitor"></iframe>
+
+<br/>
+<h1>Menu Integration in DataTable</h1>
+
+<div class="exampleIntro">
+	<p>Right-click on a row to see the ContextMenu integration in action. For more
+information on using the ContextMenu class please refer to the
+<a href="http://developer.yahoo.com/yui/menu/">documentation for the Menu control.</a></p>
+<p>
+<b style="color:red;">Note:- Only delete functionality is working in the menu.</b>
+</p>		
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div class="yui-dt" id="myContainer"><div style="display: none;" class="yui-dt-mask"></div><table summary=""><colgroup><col><col><col><col></colgroup><thead><tr class="yui-dt-first yui-dt-last"><th class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" colspan="1" rowspan="1" id="yui-dt0-th-SKU"><div class="yui-dt-liner" id="yui-dt0-th-SKU-liner"><span class="yui-dt-label"><a href="http://developer.yahoo.com/yui/examples/datatable/yui-dt0-href-SKU" title="Click to sort ascending" class="yui-dt-sortable">SKU</a></span></div></th><th class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" colspan="1" rowspan="1" id="yui-dt0-th-Quantity"><div class="yui-dt-liner" id="yui-dt0-th-Quantity-liner"><span class="yui-dt-label"><a href="http://developer.yahoo.com/yui/examples/datatable/yui-dt0-href-Quantity" title="Click to sort ascending" class="yui-dt-sortable">Quantity</a></span></div></th><th class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" colspan="1" rowspan="1" id="yui-dt0-th-Item"><div class="yui-dt-liner" id="yui-dt0-th-Item-liner"><span class="yui-dt-label"><a href="http://developer.yahoo.com/yui/examples/datatable/yui-dt0-href-Item" title="Click to sort ascending" class="yui-dt-sortable">Item</a></span></div></th><th class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" colspan="1" rowspan="1" id="yui-dt0-th-Description"><div class="yui-dt-liner" id="yui-dt0-th-Description-liner"><span class="yui-dt-label">Description</span></div></th></tr></thead><tbody style="display: none;" class="yui-dt-message"><tr class="yui-dt-first yui-dt-last"><td class="yui-dt-loading" colspan="4"><div class="yui-dt-liner">Loading...</div></td></tr></tbody><tbody style="" class="yui-dt-data" tabindex="0"><tr class="yui-dt-first yui-dt-even" id="yui-rec0" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">23-23874</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">43</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Helmet</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Red baseball helmet. Size: Large.</div></td></tr><tr class="yui-dt-odd" id="yui-rec1" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">48-38835</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">84</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Football</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Leather football.</div></td></tr><tr class="yui-dt-even" id="yui-rec2" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">84-84848</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">31</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Goggles</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Light blue swim goggles</div></td></tr><tr class="yui-dt-odd" id="yui-rec3" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">84-84843</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">56</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Badminton Set</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Set of 2 badminton rackets, net, and 3 birdies.</div></td></tr><tr class="yui-dt-even" id="yui-rec4" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">84-39321</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">128</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Tennis Balls</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Canister of 3 tennis balls.</div></td></tr><tr class="yui-dt-odd" id="yui-rec5" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">39-48949</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">55</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Snowboard</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner"></div></td></tr><tr class="yui-dt-even" id="yui-rec6" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">99-28128</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">77</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Cleats</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Soccer cleats. Size: 10.</div></td></tr><tr class="yui-dt-odd" id="yui-rec7" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">83-48281</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">65</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Volleyball</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner"></div></td></tr><tr class="yui-dt-even" id="yui-rec8" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">89-32811</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">12</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Sweatband</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Blue sweatband. Size: Medium.</div></td></tr><tr class="yui-dt-odd" id="yui-rec9" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">28-22847</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">43</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Golf Set</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Set of 9 golf clubs and bag.</div></td></tr><tr class="yui-dt-even" id="yui-rec10" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">38-38281</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">1</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Basketball Shorts</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Green basketball shorts. Size: Small.</div></td></tr><tr class="yui-dt-odd" id="yui-rec11" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">82-38333</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">288</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Lip balm</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Lip balm. Flavor: Cherry.</div></td></tr><tr class="yui-dt-even" id="yui-rec12" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">21-38485</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">177</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Ping Pong Ball</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner"></div></td></tr><tr class="yui-dt-last yui-dt-odd" id="yui-rec13" style=""><td class="yui-dt0-col-SKU yui-dt-col-SKU yui-dt-sortable yui-dt-first" headers="yui-dt0-th-SKU "><div class="yui-dt-liner">83-38285</div></td><td class="yui-dt0-col-Quantity yui-dt-col-Quantity yui-dt-sortable" headers="yui-dt0-th-Quantity "><div class="yui-dt-liner">87</div></td><td class="yui-dt0-col-Item yui-dt-col-Item yui-dt-sortable" headers="yui-dt0-th-Item "><div class="yui-dt-liner">Hockey Puck</div></td><td class="yui-dt0-col-Description yui-dt-col-Description yui-dt-last" headers="yui-dt0-th-Description "><div class="yui-dt-liner">Glow-in-the-dark hockey puck.</div></td></tr></tbody></table><div style="z-index: 1; position: absolute; visibility: hidden;" class="yui-module yui-overlay yuimenu yui-overlay-hidden" id="mycontextmenu"><div class="bd"><ul class="first-of-type"><li index="0" groupindex="0" id="yui-gen0" class="yuimenuitem first-of-type"><a class="yuimenuitemlabel" href="#">Delete Item</a></li></ul></div><div class="yui-menu-shadow"></div></div></div>
+
+<script type="text/javascript" src="DataTable-Menu_files/data.js"></script>
+<script type="text/javascript">
+YAHOO.util.Event.addListener(window, "load", function() {
+    YAHOO.example.ContextMenu = function() {
+        var myColumnDefs = [
+            {key:"SKU", label:"Drug DIN", sortable:true},
+            {key:"Quantity", label:"Qty Disp", sortable:true},
+            {key:"Item", label:"Drug Name", sortable:true},
+            {key:"Description"}
+        ];
+
+        var myDataSource = new YAHOO.util.DataSource(YAHOO.example.Data.inventory);
+        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+        myDataSource.responseSchema = {
+            fields: ["SKU","Quantity","Item","Description"]
+        };
+
+        var myDataTable = new YAHOO.widget.DataTable("myContainer", myColumnDefs, myDataSource);
+
+		// Subscribe to events for row selection 
+        myDataTable.subscribe("rowMouseoverEvent", myDataTable.onEventHighlightRow); 
+        myDataTable.subscribe("rowMouseoutEvent", myDataTable.onEventUnhighlightRow); 
+        myDataTable.subscribe("rowClickEvent", myDataTable.onEventSelectRow); 
+		
+        var onContextMenuClick = function(p_sType, p_aArgs, p_myDataTable) {
+            var task = p_aArgs[1];
+            if(task) {
+                // Extract which TR element triggered the context menu
+                var elRow = this.contextEventTarget;
+                elRow = p_myDataTable.getTrEl(elRow);
+
+                if(elRow) {
+                    switch(task.index) {
+                        case 0:     // Delete row upon confirmation
+                            var oRecord = p_myDataTable.getRecord(elRow);
+                            if(confirm("Are you sure you want to delete SKU " +
+                                    oRecord.getData("SKU") + " (" +
+                                    oRecord.getData("Description") + ")?")) {
+                                p_myDataTable.deleteRow(elRow);
+                            }
+                    }
+                }
+            }
+        };
+
+        var myContextMenu = new YAHOO.widget.ContextMenu("mycontextmenu",
+                {trigger:myDataTable.getTbodyEl()});
+        myContextMenu.addItems([[
+		{text: "Delete Item"}],[
+		{ text: "Copy", url: "#" }],[
+		{ text: "First", url: "#" },
+		{ text: "Next", url: "#" },
+		{ text: "Last", url: "#" }],[
+		{ text: "Save As...", url: "#" },
+		{ text: "Print", url: "#" }],[
+		{ text: "Help", url: "#" }],[
+		{ text: "Report Drilldown", url: "#",
+		   submenu: {
+			id:"doctor",
+			itemdata: [ { text:"Doctor Ranking by Drug(DIN)"},{text:"Doctor Ranking by Drug(GPI)"},
+			{text:"Drug Utilization - All members(DIN)"},{text:"Member Ranking by Drug(DIN)"}]
+		   }
+		}
+		]]);
+		//myContextMenu.addItem("Delete Item");
+
+        // Render the ContextMenu instance to the parent container of the DataTable
+        myContextMenu.render("myContainer");
+        myContextMenu.clickEvent.subscribe(onContextMenuClick, myDataTable);
+        
+        return {
+            oDS: myDataSource,
+            oDT: myDataTable
+        };
+    }();
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+
+<!--MyBlogLog instrumentation-->
+<script type="text/javascript" src="DataTable-Menu_files/jsserv.htm"></script>
+
+</body></html>

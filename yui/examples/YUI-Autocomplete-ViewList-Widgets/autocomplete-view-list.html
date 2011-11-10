@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>YUI: Autocomplete & View List</title>
+	<!--begin custom header content for this example-->
+	<style type="text/css">
+	body{
+	background:url('images/bg_hd.gif');
+	background-repeat:repeat-x;
+	}
+	#myAutoComplete {
+		width:15em; /* set width here or else widget will expand to fit its container */
+		padding-bottom:2em;
+	}
+	.format-results{
+	float:left;width:150px;
+	}
+	.match{
+	font-weight:bold;
+	}
+	.view-list{
+	margin-left:10px;
+	border:1px solid #7F9DB9;
+	padding-left:8px;
+	padding-right:8px;
+	padding-bottom:2px;
+	text-decoration:none;
+	}
+	.button{
+		border:1px solid #7F9DB9;margin-left:5px;cursor:pointer;padding:1px;padding-left:10px;padding-right:10px;
+	}
+	.yui-dt-col-id{
+	width:42px;
+	}
+	.yui-dt-col-state{
+	width:270px;;
+	}
+	#my-panel {
+		height: auto !important;
+	}
+	#my-panel .ft {
+		font-size: 12px !important;
+	}
+	</style>
+	<!--end custom header content for this example-->
+	</head>
+	<body class="yui-skin-sam">
+	<br/>
+	<h1>YUI: Autocomplete & View List</h1>
+	<div for="myInput">Enter a State:</div>
+	<div class="yui-ac" id="myAutoComplete" style="float:left;">
+	<input autocomplete="off" class="yui-ac-input" id="myInput" type="text">
+		<div class="yui-ac-container" id="myContainer"></div>
+	</div>
+	&nbsp;&nbsp;<a href="JavaScript:void(0);" id="view-list" class="view-list"  >View List</a>
+
+	<!--script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/yuiloader/yuiloader-min.js"></script-->
+	<script type="text/javascript" src="../cts-ria/cts-ria-debug.js"></script>
+	<script type="text/javascript">
+	//CTS.onPageReady('jquery',
+	CTS.onPageReady(
+	[{libName: 'yui', libBase: ""}],
+	//[{libName: 'jquery', libBase: "http://code.jquery.com/jquery-1.4.2.min.js"}],
+	//[{libName: 'jquery', libBase: "v1.3.2"}],
+	//[{libName: 'jquery', libBase: ""}],
+	function() {
+		var loader = new CTS_Y.util.YUILoader();
+		var baseURL = CTS.Loader.getRIAPath();
+		loader.sandbox({
+			require: ["utilities", "datasource", "datatable", "autocomplete", "container", "fonts", "logger","button"],
+			base: baseURL,
+			loadOptional: true,
+			onSuccess: function(o) {
+				var myLogReader = new CTS_Y.widget.LogReader();
+				var vBtn = new CTS_Y.widget.Button("view-list");
+				CTS_Y.log("View list js loading; we'll bring JS file and generate the view list.", "info", "example");
+				var jsFiles = [
+					"js/data.js",
+					"js/autoViewList.js"
+				];
+				var autoJS = CTS_Y.util.Get.script(jsFiles, { 
+					onSuccess: function() {
+						CTS_Y.log("file loaded");
+					}
+				});
+			}
+		});
+		loader.insert();
+	});
+	</script>
+	</div>
+	<div>
+	<p>
+	<br/>
+	<h2>Use Case</h2>
+	</p>
+	<p>When user types any character, Total Results</p>
+	<ul>
+	<li>Search item drop-down appears with a maximum of 10 results</li>
+	<li>Inputted text is highlighted in the drop-down</li>
+	<li>Clearing the text field makes the drop-down disappear</li>
+	<li>Input could be string or number</li>
+	<li>Long name will be added with ellipses(…)</li>
+	<li>Total results will be show in the footer section</li>
+	</ul>
+	<p>When user clicks on View List button or ,</p>
+	<ul>
+	<li>Overly will appears in a scrollable data table</li>
+	<li>Data table is filtered with inputted text</li>
+	<li>You can filter the values again in the overly</li>
+	<li>Inputted text is highlighted in the data table</li>
+	<li>Click on the row will highlight row</li>
+	<li>Clicking on "Select button" in the overly, input will be filled with highlighted row value.</li>
+	</ul>
+	</div>
+	</body>
+</html>

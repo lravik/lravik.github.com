@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Adding, Updating, and Deleting Rows</title>
+
+<style type="text/css">
+body{
+background:url('YUI-Autocomplete-ViewList-Widgets/images/bg_hd.gif');
+background-repeat:repeat-x;
+}
+#myAutoComplete {
+    width:15em; /* set width here or else widget will expand to fit its container */
+    padding-bottom:2em;
+}
+.format-results{
+float:left;width:150px;
+}
+.match{
+font-weight:bold;
+}
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="Adding-Updating-Del_files/fonts-min.css">
+<link rel="stylesheet" type="text/css" href="Adding-Updating-Del_files/paginator.css">
+<link rel="stylesheet" type="text/css" href="Adding-Updating-Del_files/button.css">
+<link rel="stylesheet" type="text/css" href="Adding-Updating-Del_files/datatable.css">
+<script type="text/javascript" src="Adding-Updating-Del_files/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="Adding-Updating-Del_files/element-min.js"></script>
+<script type="text/javascript" src="Adding-Updating-Del_files/paginator-min.js"></script>
+<script type="text/javascript" src="Adding-Updating-Del_files/button-min.js"></script>
+<script type="text/javascript" src="Adding-Updating-Del_files/dragdrop-min.js"></script>
+<script type="text/javascript" src="Adding-Updating-Del_files/datasource-min.js"></script>
+<script type="text/javascript" src="Adding-Updating-Del_files/datatable-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+/* custom styles for this example */
+.modform {margin-bottom: 1em;}
+.index {width:5em;}
+</style>
+
+<!--end custom header content for this example-->
+
+</head><body class="yui-skin-sam"><div class="yui-dt-resizerproxy" id="yui-dt-colresizerproxy"></div>
+
+<br/>
+<h1>Adding, Updating, and Deleting Rows</h1>
+
+<div class="exampleIntro">
+	<p>Adding, updating, and deleting row data dynamically.</p>
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<form class="modform">
+    <select id="mode">
+        <option selected="selected" value="add">Add</option>
+        <option value="update">Update</option>
+        <option value="deletestandard">Delete top-to-bottom</option>
+        <option value="deletereverse">Delete bottom-up</option>
+    </select>
+        
+    <select id="count">
+        <option selected="selected" value="1">1</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="100">100</option>
+    </select>
+    
+    row(s) at index
+    
+    <input id="index" value="0" class="index" type="text">
+   
+    <span id="go" class="yui-button yui-push-button">
+        <span class="first-child">
+            <button id="go-button" tabindex="0" type="button">Go!</button>
+        </span>
+    </span>
+</form>
+
+<div class="yui-dt" id="container"><div style="display: none;" class="yui-dt-mask"></div><table summary=""><colgroup><col><col><col><col></colgroup><thead><tr class="yui-dt-first yui-dt-last"><th class="yui-dt0-col-row yui-dt-col-row yui-dt-sortable yui-dt-resizeable yui-dt-first" colspan="1" rowspan="1" id="yui-dt0-th-row"><div class="yui-dt-resizerliner"><div class="yui-dt-liner" id="yui-dt0-th-row-liner"><span class="yui-dt-label"><a href="http://developer.yahoo.com/yui/examples/datatable/yui-dt0-href-row" title="Click to sort ascending" class="yui-dt-sortable">row counter</a></span></div><div style="left: auto; right: 0pt; top: auto; bottom: 0pt; height: 24px;" class="yui-dt-resizer" id="yui-dt0-th-row-resizer"></div></div></th><th class="yui-dt0-col-one yui-dt-col-one yui-dt-resizeable" colspan="1" rowspan="1" id="yui-dt0-th-one"><div class="yui-dt-resizerliner"><div class="yui-dt-liner" id="yui-dt0-th-one-liner"><span class="yui-dt-label">one</span></div><div style="left: auto; right: 0pt; top: auto; bottom: 0pt; height: 24px;" class="yui-dt-resizer" id="yui-dt0-th-one-resizer"></div></div></th><th class="yui-dt0-col-two yui-dt-col-two yui-dt-resizeable" colspan="1" rowspan="1" id="yui-dt0-th-two"><div class="yui-dt-resizerliner"><div class="yui-dt-liner" id="yui-dt0-th-two-liner"><span class="yui-dt-label">two</span></div><div style="left: auto; right: 0pt; top: auto; bottom: 0pt; height: 24px;" class="yui-dt-resizer" id="yui-dt0-th-two-resizer"></div></div></th><th class="yui-dt0-col-three yui-dt-col-three yui-dt-resizeable yui-dt-last" colspan="1" rowspan="1" id="yui-dt0-th-three"><div class="yui-dt-resizerliner"><div class="yui-dt-liner" id="yui-dt0-th-three-liner"><span class="yui-dt-label">three</span></div><div style="left: auto; right: 0pt; top: auto; bottom: 0pt; height: 24px;" class="yui-dt-resizer" id="yui-dt0-th-three-resizer"></div></div></th></tr></thead><tbody style="" class="yui-dt-message"><tr class="yui-dt-first yui-dt-last"><td class="yui-dt-empty" colspan="4"><div class="yui-dt-liner">No records found.</div></td></tr></tbody><tbody class="yui-dt-data" tabindex="0"></tbody></table></div>
+
+<script type="text/javascript" src="Adding-Updating-Del_files/data.js"></script>
+<script type="text/javascript">
+YAHOO.util.Event.addListener(window, "load", function() {
+    YAHOO.example.RowDataMod = function() {
+        var myColumnDefs = [
+            {key:"row", label:"row counter", resizeable:true,sortable:true},
+            {key:"one",resizeable:true},
+            {key:"two",resizeable:true},
+            {key:"three",resizeable:true}   
+        ];
+
+        var myDataSource = new YAHOO.util.DataSource([]);
+        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+        myDataSource.responseSchema = {
+            fields: ["one","two","three"]
+        };
+        
+        var myDataTable = new YAHOO.widget.DataTable("container",
+                myColumnDefs, myDataSource, {});
+                
+        var i=1,
+            bReverseSorted = false;
+
+        // Track when Column is reverse-sorted, since new data will come in out of order
+        var trackReverseSorts = function(oArg) {
+            bReverseSorted = (oArg.dir === YAHOO.widget.DataTable.CLASS_DESC);
+        };
+        
+        var globalDataCount = -1,
+            getData = function(count) {
+                if(count) {
+                    var allData = [];
+                    for(var i=0; i<count; i++) {
+                        globalDataCount++;
+                        allData.push({row:globalDataCount, one:"one", two:"two", three:"three"});
+                    }
+                    return allData;
+                }
+                else {
+                    globalDataCount++;
+                    return {row:globalDataCount, one:"one", two:"two", three:"three"};
+                }
+            };
+        
+        // Add/update/delete rows as indicated
+        var handleClick = function() {
+            // Reset sort
+            myDataTable.set("sortedBy", null);
+            
+            var mode = YAHOO.util.Dom.get("mode").value,
+                count = parseInt(YAHOO.util.Dom.get("count").value),
+                index = parseInt(YAHOO.util.Dom.get("index").value);
+                
+            if(YAHOO.lang.isNumber(index)) {
+                switch(mode) {
+                    case "add":
+                        if(count === 1) {
+                            myDataTable.addRow(getData(), index);
+                        }
+                        else {
+                            myDataTable.addRows(getData(count), index);
+                        }
+                        return;
+                    case "update":
+                        if(count === 1) {
+                            myDataTable.updateRow(index, getData());
+                        }
+                        else {
+                            myDataTable.updateRows(index, getData(count));
+                        }
+                        return;
+                    case "deletestandard":
+                        if(count === 1) {
+                            myDataTable.deleteRow(index);
+                        }
+                        else {
+                            myDataTable.deleteRows(index, count);
+                        }
+                        return;
+                    case "deletereverse":
+                        if(count === 1) {
+                            myDataTable.deleteRow(index, -1);
+                        }
+                        else {
+                            myDataTable.deleteRows(index, count*-1);
+                        }
+                        return;
+                    default:
+                        break;
+                }
+            
+            }
+            YAHOO.log("Could not continue due to invalid index.");
+        }
+
+        var btn = new YAHOO.widget.Button("go");
+        btn.on("click", handleClick);
+
+        return {
+            ds: myDataSource,
+            dt: myDataTable
+        };
+    }();
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+<!--MyBlogLog instrumentation-->
+<script type="text/javascript" src="Adding-Updating-Del_files/jsserv.htm"></script>
+
+</body></html>
