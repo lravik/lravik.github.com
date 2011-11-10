@@ -28,19 +28,13 @@
 	text-decoration:none;
 	}
 	.button{
-		border:1px solid #7F9DB9;margin-left:5px;cursor:pointer;padding:1px;padding-left:10px;padding-right:10px;
+	border:1px solid #7F9DB9;margin-left:5px;cursor:pointer;padding:1px;padding-left:10px;padding-right:10px;
 	}
 	.yui-dt-col-id{
 	width:42px;
 	}
 	.yui-dt-col-state{
 	width:270px;;
-	}
-	#my-panel {
-		height: auto !important;
-	}
-	#my-panel .ft {
-		font-size: 12px !important;
 	}
 	</style>
 	<!--end custom header content for this example-->
@@ -56,38 +50,31 @@
 	&nbsp;&nbsp;<a href="JavaScript:void(0);" id="view-list" class="view-list"  >View List</a>
 
 	<!--script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/yuiloader/yuiloader-min.js"></script-->
-	<script type="text/javascript" src="../cts-ria/cts-ria-debug.js"></script>
+	<script type="text/javascript" src="yui/yuiloader/yuiloader-min.js"></script>
 	<script type="text/javascript">
-	//CTS.onPageReady('jquery',
-	CTS.onPageReady(
-	[{libName: 'yui', libBase: ""}],
-	//[{libName: 'jquery', libBase: "http://code.jquery.com/jquery-1.4.2.min.js"}],
-	//[{libName: 'jquery', libBase: "v1.3.2"}],
-	//[{libName: 'jquery', libBase: ""}],
-	function() {
-		var loader = new CTS_Y.util.YUILoader();
-		var baseURL = CTS.Loader.getRIAPath();
+	(function() {
+		var loader = new YAHOO.util.YUILoader();
 		loader.sandbox({
 			require: ["utilities", "datasource", "datatable", "autocomplete", "container", "fonts", "logger","button"],
-			base: baseURL,
+			base: "yui/",
 			loadOptional: true,
 			onSuccess: function(o) {
-				var myLogReader = new CTS_Y.widget.LogReader();
-				var vBtn = new CTS_Y.widget.Button("view-list");
-				CTS_Y.log("View list js loading; we'll bring JS file and generate the view list.", "info", "example");
+				var myLogReader = new YAHOO.widget.LogReader();
+				var vBtn = new YAHOO.widget.Button("view-list");
+				YAHOO.log("View list js loading; we'll bring JS file and generate the view list.", "info", "example");
 				var jsFiles = [
 					"js/data.js",
 					"js/autoViewList.js"
 				];
-				var autoJS = CTS_Y.util.Get.script(jsFiles, { 
+				var autoJS = YAHOO.util.Get.script(jsFiles, { 
 					onSuccess: function() {
-						CTS_Y.log("file loaded");
+						YAHOO.log("file loaded");
 					}
 				});
 			}
 		});
 		loader.insert();
-	});
+	})();
 	</script>
 	</div>
 	<div>

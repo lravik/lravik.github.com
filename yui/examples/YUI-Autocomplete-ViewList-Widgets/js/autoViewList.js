@@ -1,11 +1,11 @@
-CTS_Y.namespace("AutocomplateViewList");
+YAHOO.namespace("AutocomplateViewList");
 
-CTS_Y.AutocompleteViewList = function() {
+YAHOO.AutocompleteViewList = function() {
 	var cellData;
 	showViewList = function(){
 		myPanel = new YAHOO.widget.Panel("my-panel", {
 			width: "400px",
-			height: "auto",
+			height: "440px",
 			fixedcenter: true, 
 			constraintoviewport: true, 
 			underlay: "shadow", 
@@ -13,7 +13,7 @@ CTS_Y.AutocompleteViewList = function() {
 			draggable: true
 		});
 		myPanel.setHeader("View List");
-		myPanel.setBody('<div style="float:left;margin:10px; font-size: 12px;"><table border="0" cellpadding="0" cellspacing="0">'
+		myPanel.setBody('<div style="float:left;margin:10px;"><table border="0" cellpadding="0" cellspacing="0">'
 			+'<tr><td><label for="state_input" style="font-weight:bold;">Find State:&nbsp;</label></td>'
 			+'<td><span id="filter-container" style="width:220px;"><input type="text" id="state-input"  style="color:#333333;height:16px;width:200px;"/><span class="clear-filter"></span></span></td>'
 			+'<td ><div class="button" id="filter_btn" >Filter</div></td>'
