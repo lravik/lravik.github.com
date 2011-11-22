@@ -1,41 +1,57 @@
 <!Doctype html>
 <html>
 	<head>
-		<title>YUI3 First Example</title>
+		<title>YUI3 Event Simulation Example</title>
+		<style type="text/css">
+			body div {
+				margin: 10px;
+				display: inline-block;
+				float: left;
+				width: 20%;
+				height: 100px;
+				border: 1px solid;
+				cursor: pointer;
+			}
+			div.highlight {
+				background-color: #C0399A;
+				border: 1px dotted;
+				text-shadow: 1px 1px 1px #dcdcdc;
+			}
+		</style>
 	</head>
 	<body class="yui3-skin-sam">
 		<p>
-			Adding one link and one button to show the different actions performed and events handling using YUI3 Lib. Following 2 different actions has defined:
-			<ol>
-				<li>Link, which just redirect user to desired link upon clicking.</li>
-				<li>Button, which will restrict the submission to next page.</li>
-			</ol>
+			In this example want to show a simple application of events and firing them manually. As we know, each click and any action performed by user browser,<br/>
+			used do all the ground work for event fire process. Now using YUI3, its very easy to add this feature.
+			<br/>
+			Use-case:
+
+			1. We will have 3 elements in a page first, second and third.
+			2. Upon clicking on first element we fire the click on second element
+			3. Now the action for second element click action will change the third element
+
+			To get this working we will be using "Y.Event.simulate" functionality.
 		</p>
-		<div>
-			<a href="http://github.com/" id="gitLink" class="gitLink">GitHub</a>
-			<div style="clear; both; height: 15px;"></div>
-			<button id="submitBtn" name="submitBtn">Submit</button>
-		</div>
+		<div id="first">This is first element</div>
+		<div id="second">This is second elemtnt</div>
+		<div id="third">This is third element</div>
 	</body>
 		<script type="text/javascript" src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
 		<script type="text/javascript">
-		YUI().use('node', function(Y) {
-			var message = "";
-			// Function which we show some message before redirecting the user to mentioned website
-			var showMessage = function(e) {
-				alert(message);
-			};
-			var linkEL = Y.one("#gitLink");
-			linkEL.on("click", function(e) {
-				message = "Message from Link click";
-				showMessage();
+		YUI().use("node", "event-simulate",  function(Y) {
+			var firstEL = Y.one("#first"),
+				secondEL = Y.one("#second"),
+				thirdEL = Y.one("#third");
+
+			secondEL.on("click", function(e) {
+				if (thirdEL.hasClass("highlight")) {
+					thirdEL.removeClass("highlight");
+				} else {
+					thirdEL.addClass("highlight");
+				}
 			});
-			var submitBtn = Y.one("#submitBtn");
-			submitBtn.on("click", function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				message = "Message from Button click";
-				showMessage();
+			firstEL.on("click", function(e) {
+				Y.Event.simulate(secondEL._node, "click");
 			});
 		});
 		</script>
