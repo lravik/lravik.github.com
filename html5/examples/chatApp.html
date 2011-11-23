@@ -1,0 +1,32 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>Simple Chat App using HTML5 Web Workers</title>
+	</head>
+	<body>
+		<p>
+			This example just to showcase the capability of HTML5 web-workers. Here I am trying to have 2 boxes which would give feel of 2 users chat windows. So once some one type and press enter, message will be delivered to the next person and same for other one too. 
+			Limitations:
+			<ol>
+				<li>Right now just working for 2 users not thinking for more simultaneous users</li>
+				<li>No big designs for chat window, just a box and button</li>
+			</ol>
+		</p>
+		<div style="clear: both; height: 10px;"></div>
+		<div class="chatwindow" id="firstChat">
+			<div class="headBox">Chat Window 1</div>
+			<div class="bodyBox"></div>
+			<div class="footBox">
+				<input type="button" id="chat1" class="subBtn" value="Send" />
+			</div>
+		</div>
+		<div class="chatwindow" id="secondChat">
+			<div class="headBox">Chat Window 2</div>
+			<div class="bodyBox"></div>
+			<div class="footBox">
+				<input type="button" id="chat2" class="subBtn" value="Send" />
+			</div>
+		</div>
+	</body>
+</html>
+		
