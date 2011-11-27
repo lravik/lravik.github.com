@@ -2,8 +2,47 @@
 <html>
 	<head>
 		<title>Simple Chat App using HTML5 Web Workers</title>
+		<style type="text/css">
+			body {
+				font-size: 12px;
+				font-family: Tahoma;
+				text-shadow: 1px 1px 5px #dcdcdc;
+			}
+			div.chatwindow {
+				width: 40%;
+				float: left;
+				display: inline-block;
+				border: 1px solid #dcdcdc;
+				box-shadow: 5px 4px 5px;
+				border-radius: 8px;
+				margin-right: 5%;
+			}
+			div.chatwindow .headBox,
+			div.chatwindow .bodyBox,
+			div.chatwindow .footBox {
+				padding: 10px;
+			}
+
+			div.chatwindow .headBox {
+				border-radius: 8px 8px 0 0;
+			}
+
+			div.chatwindow .footBox {
+				float: right;
+				border-radius: 0 0 8px 8px;
+			}
+
+			div.chatwindow .headBox {
+				background-color: orange;
+				font-size: 14px;
+				font-weight: bold;
+				color: #000;
+			}
+		</style>
 	</head>
 	<body>
+		<div id="nonsupportDiv" style="display: none; height: 15px; font-size: 10px; color: #000; background-color: #FF0000; width: 100%; position: absolute; top: 0px; left: 0xp;"></div>
+		<div style="clear: both; height: 10px;"></div>
 		<p>
 			This example just to showcase the capability of HTML5 web-workers. Here I am trying to have 2 boxes which would give feel of 2 users chat windows. So once some one type and press enter, message will be delivered to the next person and same for other one too. 
 			Limitations:
@@ -15,18 +54,59 @@
 		<div style="clear: both; height: 10px;"></div>
 		<div class="chatwindow" id="firstChat">
 			<div class="headBox">Chat Window 1</div>
-			<div class="bodyBox"></div>
+			<div class="bodyBox">
+				<textarea style="width: 100%;" rows="5" class="chat1"></textarea>
+			</div>
 			<div class="footBox">
 				<input type="button" id="chat1" class="subBtn" value="Send" />
 			</div>
 		</div>
 		<div class="chatwindow" id="secondChat">
 			<div class="headBox">Chat Window 2</div>
-			<div class="bodyBox"></div>
+			<div class="bodyBox">
+				<textarea style="width: 100%;" rows="5" class="chat2"></textarea>
+			</div>
 			<div class="footBox">
 				<input type="button" id="chat2" class="subBtn" value="Send" />
 			</div>
 		</div>
 	</body>
+	<script type="text/javascript" src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript">
+	YUI().use("node", function(Y){
+		/* Check if Web Workers are supported */
+		var username = "", useralias = "";
+		var clientTextBox = "", responseTextBoxes = "";
+		function getWebWorkerSupport() {
+		    return (typeof(Worker) !== "undefined") ? true:false;
+		}
+		if(getWebWorkerSupport() == true) {
+			var chatWorker = new Worker("chatWorker.js");
+			chatWorker.addEventListener("message", function(e) {
+				var resData = e.data;
+				useralias = resData.useralias;
+				resText = resData.response;
+				console.log(responseTextBoxes);
+/*				responseTextBoxes.each(function(textItem) {
+					console.log(textItem.getContent());
+					var content = textItem.getContent() + "<br/>" + useralias + ": " + resText;
+					textItem.setContent(content);
+				});*/
+				responseTextBoxes.append(useralias + ": " + resText);
+			});
+			Y.one("body").delegate("click", function(e){
+				var elId = this._node.id;
+				username = elId;
+				var initClientEL = this.ancestor("div.chatwindow");
+				clientTextBox = initClientEL.one("textarea." + elId);				
+				responseTextBoxes = Y.all("div.chatwindow textarea");
+				var message = Y.one("textarea." + elId)._node.value;
+				chatWorker.postMessage({"userid": elId, "msg" : message});
+			},"input.subBtn");
+		} else {
+			Y.one("#nonsupportDiv").show();
+		}	
+	});
+	</script>
 </html>
 		
