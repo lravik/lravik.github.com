@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery UA Example</title>
+	</head>
+	<body>
+		<div style="width: 200px; margin: 1% auto; border: 1px solid; padding: 10px;">
+			Hi! This page will set the skin name in class along with browser identifier.
+		</div>
+		<script type="text/javascript" src="http://g-ecx.images-amazon.com/images/G/01/TransCentral/javascript/jquery-1.5.2.min.js">
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function (){
+				var browserClassName = "",
+					skinName = "ccs-skin",
+					bodyClassName = "",
+					uaObj = navigator.userAgent.toLowerCase();
+				if (uaObj.indexOf('firefox') != -1) {
+					browserClassName = "gecko";
+				} else if (uaObj.indexOf('chrome') != -1) {
+					browserClassName = "chrome";
+				} else if (uaObj.indexOf('safari') != -1) {
+					browserClassName = "safari";
+				} else if (uaObj.indexOf('opera') != -1) {
+					browserClassName = "opera";
+				} else if (uaObj.indexOf('msie') != -1) {
+					//@TODO need to drill down and check for IE different versions too.
+					browserClassName = "ie";
+				}
+				bodyClassName = document.body.className;
+				if (bodyClassName != "") {
+					if (bodyClassName.indexOf(skinName) === -1) {
+						bodyClassName = skinName + " " + document.body.className + " " + browserClassName;
+					} else {
+						bodyClassName = document.body.className + " " + browserClassName;
+					}
+				} else {
+					bodyClassName = skinName + " " + browserClassName;
+				}
+				document.body.className = bodyClassName;
+			});
+		</script>
+	</body>
+</html>
