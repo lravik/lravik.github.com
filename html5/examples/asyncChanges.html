@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sample to have Async Changes functionality</title>
+		<style type="text/css">
+			body {
+				font-size: 12px;
+				font-family: Tahoma;
+				text-shadow: 1px 1px 5px #dcdcdc;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="nonsupportDiv" style="display: none; height: 15px; font-size: 10px; color: #000; background-color: #FF0000; width: 100%; position: absolute; top: 0px; left: 0xp;"></div>
+		<div style="clear: both; height: 10px;"></div>
+		<p>
+			This example just to showcase the capability of HTML5 web-workers. Here I am trying to showcase user interaction could be when we need to support the response from APIs for Async process and intimate user for status of the process periodically. 
+		</p>
+		<div style="clear: both; height: 10px;"></div>
+		<div id="responseBox">
+			<div id="loading" style="background-image: url(./loading-small.gif); height: 15px; width: 15px; display: none;"></div>
+			<ol id="responseList" style="width: 300px; display: inline-block; height: 100px; overflow-y: auto; border: 1px solid;">
+			</ol>
+			<div class="clearDiv"></div>
+			<input type="button" name="get_btn" id="get_btn" value="Get Data"></button>
+		</div>
+		<div id="userSourceText">
+			<textarea id="sourceText" rows="5" cols="30"></textarea>
+			<div class="clearDiv" style="height: 10px;"></div>
+			<textarea id="destText" rows="5" cols="30" style="background-color: #dcdcdc;"></textarea>			
+		</div>
+	</body>
+	<script type="text/javascript" src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript">
+	YUI().use("node", function(Y){
+		/* Check if Web Workers are supported */
+		var sourceText = "";
+		function getWebWorkerSupport() {
+		    return (typeof(Worker) !== "undefined") ? true:false;
+		}
+		if(getWebWorkerSupport() == true) {
+			var asyncWorker = new Worker("asyncWorker.js");
+			asyncWorker.addEventListener("message", function(e) {
+				Y.one("#loading").hide();
+				var resData = e.data,
+					resHTML = "<li>" + resData + "</li>",
+					resultEL = Y.one("#responseList");
+				var resultContent = resultEL.getContent();
+				var newContent = resultContent + resHTML;
+				resultEL.setContent(newContent);
+				Y.one("#loading").show();
+			});
+			Y.one("body").delegate("click", function(e){
+				Y.one("#loading").show();
+				asyncWorker.postMessage("getData");
+			},"input#get_btn");
+			
+			Y.one("body").delegate("keypress", function(e) {
+				Y.one("#destText")._node.value = Y.one("#sourceText")._node.value;
+			}, "#sourceText");
+		} else {
+			Y.one("#nonsupportDiv").show();
+		}	
+	});
+	</script>
+</html>
