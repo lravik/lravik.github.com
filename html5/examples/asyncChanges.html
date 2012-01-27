@@ -53,7 +53,7 @@
 			Y.one("body").delegate("click", function(e){
 				Y.one("#loading").show();
 				asyncWorker.postMessage("getData");
-			},"input#get_btn");
+			},"input#getBtn");
 			
 			Y.one("body").delegate("keypress", function(e) {
 				Y.one("#destText")._node.value = Y.one("#sourceText")._node.value;

@@ -8,9 +8,9 @@ self.addEventListener("message", function(e) {
 	var repost = function () {
 		if (loop < 4) {
 			postMessage("Response Text");
-			setTimeout(repost, 10000);
 			loop++;
+			setTimeout(repost, 10000);
 		}
-	}
-	setTimeout(repost, 1000);
+	};
+	setTimeout(repost, 10);
 }, false);
