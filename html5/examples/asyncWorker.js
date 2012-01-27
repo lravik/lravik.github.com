@@ -9,7 +9,9 @@ self.addEventListener("message", function(e) {
 		if (loop < 4) {
 			postMessage("Response Text");
 			loop++;
-			setTimeout(repost, 10000);
+			setTimeout(repost, 1000);
+		} else {
+			postMessage("EOR");
 		}
 	};
 	setTimeout(repost, 10);
