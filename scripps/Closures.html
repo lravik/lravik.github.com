@@ -34,22 +34,22 @@
 					Lets discuss more with one example. Assume we have 2 or more components/widgets in our page and they are getting rendered by different sources, but we want to have some interactions between these then we need to have some kind of common channel to communicate between these. Now to achieve these kinds of model we could use one common DOCUMENT scope. So when we are using this DOC scope we kind of referencing to and fro with components. This is on kind of closures structure.
 					<h2>First module</h2>
 					<pre>
-						$(document).ready(function(){
-							this.commonMsg = "Hi, first message";
-							var that = this;
-							var testFunc = function() {
-								return that.commonMsg;
-							}
-						});
+$(document).ready(function(){
+	this.commonMsg = "Hi, first message";
+	var that = this;
+	var testFunc = function() {
+		return that.commonMsg;
+	}
+});
 					</pre>
 					<h2>Second module</h2>
 					<pre>
-						$(document).ready(function(){
-							var that = this;
-							var secondFunc = function(){
-								document.write(that.commonMsg);
-							}
-						});
+$(document).ready(function(){
+	var that = this;
+	var secondFunc = function(){
+		document.write(that.commonMsg);
+	}
+});
 					</pre>
 					Here we have one common variable defined on document level and using that in 2 different scopes, so this is one type of closures. I mean here we are trying to use the variable from parent context, and that variable will be having reference until all handlers are not dereferenced or cleared.
 				</p>
