@@ -51,11 +51,12 @@
 						}
 						$.each(numList, function(i, item){
 							var itemHTML = "";
-							if (item%3 == 0 && item%5 == 0) {
+							var threeVal = item%3, fiveVal = item%5;
+							if (threeVal == 0 && fiveVal == 0) {
 								itemHTML = "<li>FizzBuzz</li>";
-							} else if (item%3 == 0 && item%5 != 0) {
+							} else if (threeVal == 0 && fiveVal != 0) {
 								itemHTML = "<li>Fizz</li>";
-							} else if (item%3 != 0 && item%5 == 0) {
+							} else if (threeVal != 0 && fiveVal == 0) {
 								itemHTML = "<li>Buzz</li>";
 							} else {
 								itemHTML = "<li>" + item + "</li>";
