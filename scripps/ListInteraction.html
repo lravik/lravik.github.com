@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML Development using JSON object</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+			body {
+				width: 100%;
+				margin: 5px auto;
+				height: 100%;
+				text-align: center;
+			}
+			.mainContainer {
+				width: 70%;
+				text-align: left;
+				margin: 0px auto;
+			}
+			.mainContainer pre {
+				background-color: #dcdcdc;
+				padding: 10px;
+				text-align: left;
+				width: 100%;
+			}
+			.hide {
+				display: none;
+			}
+			.show {
+				display: inline-block;
+			}
+			.listContainer {
+				background-color: #fafafa;
+				border: 1px solid #ddd;
+				margin: 5px;
+			}
+			.listContainer .left-box,
+			.listContainer .right-box {
+				float: left;
+				display: inline-block;
+			}
+			.listContainer .left-box ul {
+				border-right: 1px solid #ddd;
+				padding: 5px;
+				width: 200px;
+				list-style-type: none;
+				margin: 0px;
+			}
+			.listContainer .left-box ul li {
+				font-weight: normal;
+				padding: 10px 5px;
+				cursor: pointer;
+				list-style-type: none;
+				color: #176684;
+			}
+			.listContainer .left-box ul li:hover {
+				background-color: #d6d6d6;
+				font-weight: bold;
+				color: #000;
+			}
+			.listContainer .right-box .details-ul {
+				padding: 15px;
+				width: 500px;
+				margin: 0px;
+			}
+			.listContainer .right-box .details-ul ul {
+				float: left;
+				display: inline-block;
+				width: 40%;
+			}
+			.listContainer .right-box .details-ul span {
+				float: left;
+				display: inline-block;
+				font-weight: bold;
+			}
+		</style>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>		
+	</head>
+	<body>
+		<div class="mainContainer">
+			<article>
+				<header>
+					<h1>List interactions using jQuery</h1>
+				</header>
+				<div class="listContainer">
+					<div class="left-box">
+						<ul>
+							<li class="one">topic 1</li>
+							<li class="two">topic 2</li>
+							<li class="three">topic 3</li>
+							<li class="four">topic 4</li>
+							<li class="five">topic 5</li>
+							<li class="six">topic 6</li>
+							<li class="sevel">topic 7</li>
+							<li class="eight">topic 8</li>
+						</ul>
+					</div>
+					<div class="right-box">
+						<div class="details-ul hide">
+							<span class="hd">CONTENT</span>
+							<div style="clear: both; height: 1px;"></div>
+							<ul class="details-ul">
+								<li>link</li>
+								<li>link</li>
+								<li>link</li>
+								<li>link</li>
+							</ul>
+							<ul class="details-ul">
+								<li>link</li>
+								<li>link</li>
+								<li>link</li>
+								<li>link</li>
+							</ul>
+						</div>
+					</div>
+					<div style="clear: both; height: 1px;"></div>
+				</div>
+				<script type="text/javascript">
+					$(".listContainer").delegate(".left-box ul li", "mouseover", function(){
+						$(".right-box .details-ul ul li").append(" " + this.className);
+						$(".right-box .details-ul").toggleClass("hide", false);
+					});
+					$(".listContainer").delegate(".left-box ul li", "mouseout", function(){
+						$(".right-box .details-ul ul li").text("link");
+						$(".right-box .details-ul").toggleClass("hide", true);
+					});
+				</script>
+			</article>
+		</div>
+	</body>
+</html>
