@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML Development using JSON object</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+			body {
+				width: 100%;
+				margin: 5px auto;
+				height: 100%;
+				text-align: center;
+			}
+			.mainContainer {
+				width: 70%;
+				text-align: left;
+				margin: 0px auto;
+			}
+			.mainContainer pre {
+				background-color: #dcdcdc;
+				padding: 10px;
+				text-align: left;
+				width: 100%;
+			}
+		</style>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+		<script type="text/javascript">
+		var jsonObj = {
+				"items": [
+					{
+						"title": "sample 1",
+						"author": "author 1"
+					},
+					{
+						"title": "sample 2",
+						"author": "author 2"
+					}
+				]
+		};
+		</script>
+		
+	</head>
+	<body>
+		<div class="mainContainer">
+			<article>
+				<header>
+					<h1>Constructing HTML using JSON object given</h1>
+				</header>
+				<p>
+					Here we have a JSON object which need to be used and generate a HTML block. Here is the JSON
+					<pre>
+{"items": [{"title": "sample 1", "author": "author 1"},
+{"title": "sample 2", "author": "author 2"}]}
+					</pre>
+					
+					To generate the HTML we could use jQuery or native JavaScript. In jQuery way only we have 2 ways,
+					i. Using Templates plugin
+					ii. Using $.each
+					
+					<h2>Using jQuery</h2>
+					We could use $.each to iterate and generate the HTML.
+					
+					<script type="text/javascript">
+						var newsEL = document.createElement("div");
+						newsEL.className = "news-story";
+						$(".mainContainer").append($(newsEL));
+						
+						//Using Templates plugin
+						var scrippTmpl = "<h5>${title}</h5><p>By: ${author}</p>";
+						$.template("scrippsTmpl", scrippTmpl);
+						$.tmpl("scrippsTmpl", jsonObj.items).appendTo(".news-story");
+						
+						//Using $.each
+						$.each(jsonObj.items, function(i, item){
+							var tempHTML = "<h5>" + item.title + "</h5><p>By: " + item.author + "</p>";
+							$(tempHTML).appendTo(".news-story");
+						});
+					</script>
+					<div style="clear: both; height: 2px;"></div>
+					<textarea rows="10" cols="100">
+//Using Templates plugin
+var scrippTmpl = "<h5>${title}</h5><p>By: ${author}</p>";
+$.template("scrippsTmpl", scrippTmpl);
+$.tmpl("scrippsTmpl", jsonObj.items).appendTo(".news-story");
+
+//Using $.each
+$.each(jsonObj.items, function(i, item){
+	var tempHTML = "<h5>" + item.title + "</h5><p>By: " + item.author + "</p>";
+	$(tempHTML).appendTo(".news-story");
+});
+					</textarea>
+				</p>
+			</article>
+		</div>
+	</body>
+</html>
