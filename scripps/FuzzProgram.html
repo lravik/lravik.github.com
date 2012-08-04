@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML Development using JSON object</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+			body {
+				width: 100%;
+				margin: 5px auto;
+				height: 100%;
+				text-align: center;
+			}
+			.mainContainer {
+				width: 70%;
+				text-align: left;
+				margin: 0px auto;
+			}
+			.mainContainer pre {
+				background-color: #dcdcdc;
+				padding: 10px;
+				text-align: left;
+				width: 100%;
+			}
+			.hide {
+				display: none;
+			}
+			.show {
+				display: inline-block;
+			}
+			ul li {
+				font-weight: normal;
+				list-style-type: none;
+				color: #176684;
+			}
+		</style>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	</head>
+	<body>
+		<div class="mainContainer">
+			<article>
+				<header>
+					<h1>FuzzBuzz Program</h1>
+				</header>
+				<ul id="list">
+				</ul>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						var numList = [];
+						for (var i = 1; i < 101; i++) {
+							numList.push(i);
+						}
+						$.each(numList, function(i, item){
+							var itemHTML = "";
+							if (item%3 == 0 && item%5 == 0) {
+								itemHTML = "<li>FizzBuzz</li>";
+							} else if (item%3 == 0 && item%5 != 0) {
+								itemHTML = "<li>Fizz</li>";
+							} else if (item%3 != 0 && item%5 == 0) {
+								itemHTML = "<li>Buzz</li>";
+							} else {
+								itemHTML = "<li>" + item + "</li>";
+							}
+							$(itemHTML).appendTo("#list");
+						});
+					});
+				</script>
+			</article>
+		</div>
+	</body>
+</html>
