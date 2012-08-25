@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=960" id="meta-viewport" />
 		<meta name="description" content="simple jQuery plugin for 2 arrays comparing" />
 		<meta name="keywords" content="jQuery, array, compare, array compare, plugin" />
-		<link rel="stylesheet" href="../saburi-styles.css" />
+		<link rel="stylesheet" href="../../saburi-styles.css" />
 		<!--script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script-->
 		<script type="text/javascript" src="../jquery.js"></script>
 		<script type="text/javascript" src="../plugins/jquery.arrayCompare.js"></script>
@@ -16,16 +16,19 @@
 		<div class="mainContent">
 			<div class="topicDesc">
 				This page targeted to depict the usage of <a href='http://lravik.github.com/jquery/plugins/jquery.arrayCompare.js' title='jQuery Array Compare plugin'>jQuery plugin for Array Compare.</a>. While working on one of project came across the problem where I need to compare 2 objects and were looking for one common plugin. With little search decided to write my own simple plugin for the same and thought to share the same with community. Here are the details, problem statement for this plugin
-				1. Have 2 simple arrays, i.e., Array having elements of premitive data types
-				2. No need to too extra logic for comparing
-				3. Single level arrays, i.e., no nested arrays
+				<ol>
+					<li>Have 2 simple arrays, i.e., Array having elements of premitive data types</li>
+					<li>No need to too extra logic for comparing</li>
+					<li>Single level arrays, i.e., no nested arrays</li>
+				</ol>
 				So having these things in mind started writing code and here is the plugin. Lets evaluate this plugin with some examples. 
+				<div class="clearDiv" style="height: 10px;"></div>
 				1. Positive comparison -- Lets take 2 Arrays having same elements in different order with same length of childs
 				<pre>
 var arr1 = ["first", 2, "three", 100], arr2 = [2, 100, "first", "three"];
  				</pre>
 				Now lets test this, <a id="testplugin" href="javascript: void(0);">Click Here</a>
-				<div class="clearDiv"></div>
+				<div class="clearDiv" style="height: 10px;"></div>
 				Now, in below 2 entry controls provide 2 arrays and click on the button below to test the compare plugin
 				<div class="clearDiv"></div>
 				<label for="firstArrEl">Enter array value for first array</label>
