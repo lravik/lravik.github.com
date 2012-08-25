@@ -16,9 +16,28 @@
 	 * returns the flag, true for same and false for different
 	 */
 	$.objCompare = function (fromObj, toObj, compKeys) {
+		//IF Object.keys supported then use that otherwise use some for loopes
+		if (typeof Object.keys == "undefined") {
+			Object.keys = function (obj) {
+				var props=[];
+				for (var p in obj){
+				   	if (obj.propertyIsEnumerable(p)) {
+				    	props.push(p)
+					}
+				}
+				return props;
+			}
+		}
 		var fromKeys = Object.keys(fromObj),
 			toKeys = Object.keys(toObj),
 			compFlag = true;
+		/**
+		 * Check if the object attributes length is different then definitely objects are not comparable, so return false here only
+		 */
+		if (fromKeys.length != toKeys.length) {
+			return false;
+		}
+		
 		if (compKeys != undefined) {
 			fromKeys = compKeys;
 		}
