@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Array Compare Plugin Example</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=960" id="meta-viewport" />
+		<meta name="description" content="simple jQuery plugin for 2 arrays comparing" />
+		<meta name="keywords" content="jQuery, array, compare, array compare, plugin" />
+		<link rel="stylesheet" href="../../saburi-styles.css" />
+		<!--script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script-->
+		<script type="text/javascript" src="../jquery.js"></script>
+		<script type="text/javascript" src="../plugins/jquery.objectCompare.js"></script>
+	</head>
+	<body>
+		<div class="mainContent">
+			<div class="topicDesc">
+				This page targeted to depict the usage of <a href='http://lravik.github.com/jquery/plugins/jquery.objectCompare.js' title='jQuery Object Compare plugin'>jQuery plugin for Objects Compare.</a>. Problem statement for this plugin
+				<ol>
+					<li>Need to compare 2 objects</li>
+					<li>Objects need to be same size to get compared. We won't compare one object partial with other object</li>
+					<li>Object child elements need not to be in same sequence, could be in any order</li>
+					<li>Expecting objects are having childs in key/value pairs</li>
+				</ol>
+				So having these things in mind started writing code and here is the plugin. Lets evaluate this plugin with some examples. 
+				<div class="clearDiv" style="height: 10px;"></div>
+				Positive comparison -- Lets take 2 Arrays having same elements in different order with same length of childs
+				<pre>
+var obj1 = {"first": 1, "second": 2, "three": 4}, obj2 = {"first": 1, "three": 4, "second": 2};
+ 				</pre>
+				Now lets test this, <a id="testplugin" href="javascript: void(0);">Click Here</a>
+				<div class="clearDiv" style="height: 10px;"></div>
+				Now, in below 2 entry controls provide 2 arrays and click on the button below to test the compare plugin
+				<div class="clearDiv"></div>
+				<label for="firstArrEl">Enter array value for first array</label>
+				<textarea rows="5" cols="100" id="firstElement"></textarea>
+				<div class="clearDiv"></div>
+				<label for="secondArrEl">Enter array value for second array</label>
+				<textarea rows="5" cols="100" id="secondElement"></textarea>
+				<div class="clearDiv" style="height: 10px;"></div>
+				<button id="compareBtn">Compare</button>
+				<script type="text/javascript">
+					$(document).ready(function(){
+						var obj1 = {"first": 1, "second": 2, "three": 4}, obj2 = {"first": 1, "three": 4, "second": 2};
+						$("#testplugin").bind("click", function(){
+							var result = $.objectCompare(obj1, obj2);
+							var response = "";
+							if (result) {
+								response = "Both objects are identical";
+							} else {
+								response = "Objects are not matching";
+							}
+							alert(response);
+						});
+						$("button#compareBtn").bind("click", function(){
+							var firstArr = JSON.parse($("#firstElement").val()),
+								secondArr = JSON.parse($("#secondElement").val());
+							var result = $.objectCompare(firstArr, secondArr);
+							var response = "";
+							if (result) {
+								response = "Both objects are identical";
+							} else {
+								response = "Objects are not matching";
+							}
+							alert(response);
+						});
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>		

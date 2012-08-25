@@ -15,7 +15,7 @@
 	 * 
 	 * returns the flag, true for same and false for different
 	 */
-	$.objCompare = function (fromObj, toObj, compKeys) {
+	$.objectCompare = function (fromObj, toObj, compKeys) {
 		//IF Object.keys supported then use that otherwise use some for loopes
 		if (typeof Object.keys == "undefined") {
 			Object.keys = function (obj) {
