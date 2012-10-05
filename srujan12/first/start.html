@@ -21,11 +21,16 @@
 	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">	
 	<style type="text/css">
 	
+		h1, h2, h3, h4, h5 {
+			font-family: Myriad Pro;
+			font-weight: normal;
+			line-height: 5px;
+		}
+
 		#mainLayout {
-			width: 100%;
+			width: 445px;
 			height: auto;
 			margin: 0px auto;
-			border: 1px dotted;
 		}
 		
 		.clearDiv {
@@ -34,11 +39,9 @@
 		}
 		
 		.loginForm {
-			border: 1px solid lightblue;
-			width: 300px;
-			height: auto;
-			margin: 10px auto;
-			padding: 15px;
+			background-image: url(images/login_bg.png);
+			width: 445px;
+			height: 234px;
 		}
 		
 		label {
@@ -49,12 +52,17 @@
 		}
 		
 		a {
-			margin-left: 100px;
-			padding: 5px 10px;
-			background-color: lightblue;
-			border: 1px solid blue;
-			border-radius: 5px;
-			color: #000;
+			background-image: url(images/login.png);
+			display: inline-block;
+			width: 86px;
+			height: 35px;
+			margin: 5% 0 0 35%;
+		}
+		
+		#loginPanel {
+			margin: 12% 0 0 54%;
+			float: right;
+			display: inline-block;
 		}
 		
 	</style>
@@ -63,13 +71,15 @@
 
 <div id="mainLayout">
 	<div class="loginForm">
-		<label for="loginname">User</label>
-		<input type="text" id="loginname" name="loginname" value="" />
-		<div class="clearDiv" style="height: 10px;"></div>
-		<label for="password">Password</label>
-		<input type="text" id="password" name="password" value="" />
-		<div class="clearDiv" style="height: 10px;"></div>
-		<a href="second.html">Login</a>
+		<div id="loginPanel">
+			<label for="loginname">User</label>
+			<input type="text" id="loginname" name="loginname" value="" />
+			<div class="clearDiv" style="height: 10px;"></div>
+			<label for="password">Password</label>
+			<input type="text" id="password" name="password" value="" />
+			<div class="clearDiv" style="height: 10px;"></div>
+			<a href="second.html"></a>
+		</div>
 	</div>
 </div>
 </body>

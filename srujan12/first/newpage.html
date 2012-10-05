@@ -21,11 +21,16 @@
 	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">	
 	<style type="text/css">
 	
+		h1, h2, h3, h4, h5 {
+			font-family: Myriad Pro;
+			font-weight: normal;
+			line-height: 5px;
+		}
+
 		#mainLayout {
-			width: 100%;
-			height: auto;
+			width: 768px;
+			height: 480px;
 			margin: 0px auto;
-			border: 1px dotted;
 		}
 		
 		.clearDiv {
@@ -35,6 +40,8 @@
 		
 		a {
 			text-decoration: none;
+			display: inline-block;
+			margin: 0 10px;
 		}		
 				
 		label {
@@ -49,66 +56,111 @@
 		}
 		
 		.layoutList {
-			width: 300px;
-			height: auto;
-			border: 1px solid lightblue;
-			margin: 10px auto;
+			background-color: #ececec;
+			width: 768px;
+			height: 240px;
+			padding: 10px;
 		}
 		
 		li {
 			margin: 0px auto;
 			text-align: center;
+			float: left;
+			display: inline-block;
 		}
 		
 		#first {
-			background-image: url(images/firstLayout.png);
-			width: 186px;
-			height: 60px;
-			clear: both;
-			border: 1px solid lightblue;
-			display: inline-block;
-		}
-
-		#second {
-			background-image: url(images/secondLayout.png);
-			width: 155px;
-			height: 60px;
-			clear: both;
-			border: 1px solid lightblue;
-			display: inline-block;
-		}
-
-		#third {
-			background-image: url(images/thirdLayout.png);
-			width: 155px;
-			height: 60px;
-			clear: both;
-			border: 1px solid lightblue;
+			background-image: url(images/type1_n.png);
+			width: 170px;
+			height: 196px;
 			display: inline-block;
 		}
 		
-		#fourth {
-			background-image: url(images/fourthLayout.png);
-			width: 155px;
-			height: 60px;
-			clear: both;
-			border: 1px solid lightblue;
+		a#first:hover {
+			background-image: url(images/type1_h.png);
+		}
+
+		#second {
+			background-image: url(images/type2_n.png);
+			width: 286px;
+			height: 165px;
 			display: inline-block;
 		}
+
+		a#second:hover {
+			background-image: url(images/type2_h.png);
+		}
+
+		#third {
+			background-image: url(images/type3_n.png);
+			width: 229px;
+			height: 120px;
+			display: inline-block;
+		}
+
+		a#third:hover {
+			background-image: url(images/type3_h.png);
+		}
+		
+		#fourth {
+			background-image: url(images/type4_n.png);
+			width: 229px;
+			height: 200px;
+			display: inline-block;
+		}
+
+		a#fourth:hover {
+			background-image: url(images/type4_h.png);
+		}
+
+		#fifth{
+			background-image: url(images/type5_n.png);
+			width: 229px;
+			height: 169px;
+			display: inline-block;
+		}
+
+		a#fifth:hover {
+			background-image: url(images/type5_h.png);
+		}
+
+		#sixth {
+			background-image: url(images/type6_n.png);
+			width: 244px;
+			height: 212px;
+			display: inline-block;
+		}
+
+		a#sixth:hover {
+			background-image: url(images/type6_h.png);
+		}
+
+		#buildSelect {
+			background-color: #ececec;
+			width: 768px;
+			height: 480px;
+			padding: 10px;
+		}
+
 	</style>
 </head> 
 <body class="yui3-skin-sam"> 
 
 <div id="mainLayout">
+	<div id="scHd">
+		<h5>Layout Manager Tool</h5>
+		<h1>Select Layout</h1>
+	</div>
+	<div class="clearDiv" style="height: 20px;"></div>
 	<ul class="layoutList">
-		<li>
-			<label>Select the Building</label>
-			<div class="clearDiv" style="height: 5px;"></div>
-		</li>
 		<li><a href="firstLayout.html" id="first"></a></li>
 		<li><a href="firstLayout.html" id="second"></a></li>
 		<li><a href="firstLayout.html" id="third"></a></li>
+	</ul>
+	<ul class="layoutList">
 		<li><a href="firstLayout.html" id="fourth"></a></li>
+		<li><a href="firstLayout.html" id="fifth"></a></li>
+		<li><a href="firstLayout.html" id="sixth"></a></li>
 	</ul>
 	<div class="clearDiv"></div>
 </div>

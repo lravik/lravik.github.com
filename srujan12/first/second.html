@@ -20,12 +20,16 @@
 	<meta http-equiv="X-XRDS-Location" content="/xrds.xml">
 	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">	
 	<style type="text/css">
+		h1, h2, h3, h4, h5 {
+			font-family: Myriad Pro;
+			font-weight: normal;
+			line-height: 5px;
+		}
 	
 		#mainLayout {
-			width: 100%;
-			height: auto;
+			width: 768px;
+			height: 480px;
 			margin: 0px auto;
-			border: 1px dotted;
 		}
 		
 		.clearDiv {
@@ -35,35 +39,42 @@
 		
 		a {
 			text-decoration: none;
-			border: 1px solid;
-			border-radius: 5px;
-			padding: 2px 10px;
 		}		
-		
-		a.selected {
-			background-color: lightblue;
+					
+		#actionSelect {
+			width: auto;
+			height: auto;
+			text-align: center;
 		}
 		
-		a:hover {
-			background-color: yellow;
+		a#createBtn {
+			background-image: url(images/createlayout.png);
+			width: 307px;
+			height: 64px;
+			display: inline-block;
 		}
 		
-		label {
-			font-weight: bold;
-			font-size: 20px;
+		a#modifyBtn {
+			background-image: url(images/Modify.png);
+			width: 307px;
+			height: 64px;
+			display: inline-block;
 		}
-		
 	</style>
 </head> 
 <body class="yui3-skin-sam"> 
 
 <div id="mainLayout">
-	<div style="width: 300px; margin: 5px auto;">
-		<label>Action type</label>
+	<div id="scHd">
+		<h5>Layout Manager Tool</h5>
+		<h1>Select Layout Layout</h1>
+	</div>
+	<div class="clearDiv" style="height: 20px;"></div>
+	<div id="actionSelect">
 		<div class="clearDiv" style="height: 5px;"></div>
-		<a href="editpage.html" class="selected">Modify Layout</a>
+		<a href="newpage.html" id="createBtn"></a>
 		<div class="clearDiv" style="height: 10px;"></div>
-		<a href="newpage.html">New Layout</a>	
+		<a href="editpage.html" id="modifyBtn"></a>	
 	</div>
 </div>
 </body>
