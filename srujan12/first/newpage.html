@@ -1,0 +1,116 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>My Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=960" id="meta-viewport">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script>
+    if (screen.width < 768) {
+        document.getElementById('meta-viewport').setAttribute('content', 'width=768');
+    }
+    </script>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.7.2/build/cssgrids/cssgrids-min.css">
+
+    <link rel="stylesheet" href="http://yuilibrary.com/combo/css?main-min.css">
+    <link rel="stylesheet" href="http://yuilibrary.com/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="http://yuilibrary.com/css/docs-min.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta http-equiv="X-XRDS-Location" content="/xrds.xml">
+	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">	
+	<style type="text/css">
+	
+		#mainLayout {
+			width: 768px;
+			height: auto;
+			margin: 0px auto;
+			border: 1px dotted;
+		}
+		
+		.clearDiv {
+			clear: both;
+			height: 1px;
+		}
+		
+		a {
+			text-decoration: none;
+		}		
+				
+		label {
+			font-weight: bold;
+			font-size: 20px;
+		}
+		
+		ul, li {
+			list-style-type: none;
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		.layoutList {
+			width: 300px;
+			height: auto;
+			border: 1px solid lightblue;
+			margin: 10px auto;
+		}
+		
+		li {
+			margin: 0px auto;
+			text-align: center;
+		}
+		
+		#first {
+			background-image: url(images/firstLayout.png);
+			width: 186px;
+			height: 60px;
+			clear: both;
+			border: 1px solid lightblue;
+			display: inline-block;
+		}
+
+		#second {
+			background-image: url(images/secondLayout.png);
+			width: 155px;
+			height: 60px;
+			clear: both;
+			border: 1px solid lightblue;
+			display: inline-block;
+		}
+
+		#third {
+			background-image: url(images/thirdLayout.png);
+			width: 155px;
+			height: 60px;
+			clear: both;
+			border: 1px solid lightblue;
+			display: inline-block;
+		}
+		
+		#fourth {
+			background-image: url(images/fourthLayout.png);
+			width: 155px;
+			height: 60px;
+			clear: both;
+			border: 1px solid lightblue;
+			display: inline-block;
+		}
+	</style>
+</head> 
+<body class="yui3-skin-sam"> 
+
+<div id="mainLayout">
+	<ul class="layoutList">
+		<li>
+			<label>Select the Building</label>
+			<div class="clearDiv" style="height: 5px;"></div>
+		</li>
+		<li><a href="firstLayout.html" id="first"></a></li>
+		<li><a href="firstLayout.html" id="second"></a></li>
+		<li><a href="firstLayout.html" id="third"></a></li>
+		<li><a href="firstLayout.html" id="fourth"></a></li>
+	</ul>
+	<div class="clearDiv"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>My Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=960" id="meta-viewport">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script>
+    if (screen.width < 768) {
+        document.getElementById('meta-viewport').setAttribute('content', 'width=768');
+    }
+    </script>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.7.2/build/cssgrids/cssgrids-min.css">
+
+    <link rel="stylesheet" href="http://yuilibrary.com/combo/css?main-min.css">
+    <link rel="stylesheet" href="http://yuilibrary.com/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="http://yuilibrary.com/css/docs-min.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta http-equiv="X-XRDS-Location" content="/xrds.xml">
+	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+
+	<script src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js"></script>
+	
+	<style type="text/css">
+	
+		#mainLayout {
+			width: 768px;
+			height: auto;
+			margin: 0px auto;
+			border: 1px dotted;
+		}
+		
+		#mainLayout #toolBox {
+			width: 100%;
+			height: 50px;
+			border-bottom: 1px shadow #dcdcdc;
+			background-color: lightblue;
+			text-align: center;
+		}
+		
+		ul, li {
+			list-style-type: none;
+			margin: 0px;
+			padding: 0px;
+			display: inline-block;
+		}
+		
+		li {
+			float: left;
+			margin: 0px 10px;
+			cursor: pointer;
+		}
+		
+		ul#toolList {
+			float: left;
+			margin: 13px 5%;
+		}
+		
+		ul#actionItems {
+			float: right;
+			margin: 8px 5%;
+		}
+		
+		li#yard {
+			background-color: lightgreen;
+		}
+		
+		li.yardEl {
+			border:1px solid #000;
+			width: 80px;
+			height: 20px;
+			text-align: center;
+			padding: 1px 0px;
+		}
+		
+		li#dock {
+			background-color: #0000ff;
+		}
+
+		li.dockEl {
+			border:1px solid #000;
+			width: 80px;
+			height: 20px;
+			text-align: center;
+			color: yellow;
+			margin: -5px 0px;
+			padding: 5px 0px !important;
+		}
+		
+		li.btns {
+			background-color: lightgray;
+			border-style: outset;
+			border-radius: 5px;
+			padding: 3px 10px;
+			border-radius: 5px;
+			font-weight: bold;
+		}
+		
+		li#editBtn {
+			background-color: orange;
+		}
+		
+		.clearDiv {
+			clear: both;
+			height: 1px;
+		}
+		
+		.dockPanel {
+			width: 15%; height: 100%; float: left; display: inline-block; margin: 30px auto;
+		}
+		
+		.yardPanel {
+			float: left; display: inline-block; width: 29.8%; height: 100%;
+		}
+		
+		#internal {
+			float: left; display: inline-block; width: 10%; height: 100%; background-color: #dcdcdc; border: 1px solid #bcbcbc; margin: 30px auto; text-align: center;
+		}
+		
+		#mainLayout .yui3-dd-drop-active-valid {
+		    background-color: #ffffcc;
+		}
+		#mainLayout .yui3-dd-drop-over {
+		    background-color: #ffffcc;
+		}
+	</style>
+</head> 
+<body class="yui3-skin-sam"> 
+
+<div id="mainLayout">
+	<div id="toolBox">
+		<ul id="toolList">
+			<li id="yard" class="dropEl yardEl">Yard Slot</li>
+			<li id="dock" class="dropEl dockEl">Dock Door</li>
+		</ul>	
+		<ul id="actionItems">
+			<li id="editBtn" class="btns">Export</li>
+			<li id="resetBtn" class="btns">Reset</li>
+		</ul>
+	</div>
+	<div id="layout" style="border: 1px solid; width: 90%; margin: 10px auto;">
+		<div id="building" style="width: 100%; height: 400px;">
+			<ul class="yardPanel slot" id="y1">
+				<li class="dropEl yardEl" id="YY-1">YY-1</li>
+				<li class="dropEl yardEl" id="YY-2">YY-2</li>
+				<li class="dropEl yardEl" id="YY-3">YY-3</li>
+			</ul>
+			<ul class="dockPanel slot" id="d1">
+				<li class="dropEl dockEl" id="DD-1" style="color: #000; width: 100px;">DD-1</li>
+			</ul>
+			<div id="internal">
+				<span style="font-size: 20px; position: relative; top: 40%;">Sort Center</span>
+			</div>
+			<ul class="dockPanel slot" id="d2"></ul>
+			<ul class="yardPanel slot" id="y2"></ul>
+		</div>
+		<div class="clearDiv" style="height: 30px;"></div>
+	</div>
+</div>
+<script type="text/javascript">
+YUI().use('dd-drop', 'dd-proxy', 'dd-constrain', function(Y) {
+	
+	Y.one("#mainLayout").delegate("click", function(){
+		document.location = "/srujan12/first/firstLayout.html";
+	}, "#resetBtn");
+
+    var slots = Y.one('#mainLayout').all('.slot');
+    Y.each(slots, function(v, k) {
+        var id = v.get('id'), groups = ['two'];
+        switch (id) {
+            case 'y1':
+            case 'y2':
+                groups = ['one'];
+                break;
+        }
+        var drop = new Y.DD.Drop({
+            node: v,
+            groups: groups
+        });
+    });
+
+    var dropElements = Y.one('#mainLayout').all('.dropEl');
+    Y.each(dropElements, function(v, k) {
+        var id = v.get('id'), groups = ['one', 'two'];
+        switch (id) {
+            case 'yard':
+                groups = ['one'];
+                break;
+            case 'dock':
+                groups = ['two'];
+                break;
+        }
+        var drag = new Y.DD.Drag({
+            node: v,
+            groups: groups
+        }).plug(Y.Plugin.DDProxy, {
+            moveOnEnd: false
+        }).plug(Y.Plugin.DDConstrained, {
+            constrain2node: '#mainLayout'
+        });
+        drag.on('drag:start', function() {
+            var p = this.get('dragNode'),
+                n = this.get('node');
+                n.setStyle('opacity', .25);
+                if (!this._playerStart) {
+                    this._playerStart = this.nodeXY;
+                }
+            p.set('innerHTML', n.get('innerHTML'));
+            p.setStyles({
+                backgroundColor: n.getStyle('backgroundColor'),
+                color: n.getStyle('color'),
+                opacity: .65
+            });
+        });
+        drag.on('drag:end', function() {
+            var n = this.get('node');
+            n.setStyle('opacity', '1');
+        });
+        drag.on('drag:drophit', function(e) {
+            var xy = e.drop.get('node').getXY();
+			//Create a new node and drop the same to yardPanel
+			var newNode = this.get('node').cloneNode(),
+				childELs = e.drop.get('node').all("li");
+			var newCnt = childELs.size() + 1;
+			if (this.get('node').hasClass("dockEl")) {
+				newNode.set("id", "DD-" + newCnt);
+				newNode.setStyles({
+					color: "#000000",
+					margin: 0,
+					width: "100px"
+				});
+				newNode.setHTML("DD-" + newCnt);
+			} else {
+				newNode.set("id", "YY-" + newCnt);				
+				newNode.setHTML("YY-" + newCnt);
+			}
+			newNode.setAttribute("contenteditable", true);
+			newNode.setStyles({
+				opacity: 1
+			});
+			e.drop.get('node').appendChild(newNode);
+        });
+        drag.on('drag:dropmiss', function(e) {
+            if (this._playerStart) {
+                this.get('node').setXY(this._playerStart, Y.UA.ie);
+                this._playerStart = null;
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
