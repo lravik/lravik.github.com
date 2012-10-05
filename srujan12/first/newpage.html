@@ -76,7 +76,12 @@
 			display: inline-block;
 		}
 		
-		@mobile a#first,
+		@mobile handheld {
+			a#first {
+				background-image: url(images/type1_h.png);
+			}
+		} 
+		
 		a#first:hover {
 			background-image: url(images/type1_h.png);
 		}
