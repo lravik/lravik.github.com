@@ -10,6 +10,18 @@
         document.getElementById('meta-viewport').setAttribute('content', 'width=768');
     }
     </script>
+    <!--link rel="stylesheet" href="cssFamily.css">
+    <link rel="stylesheet" href="yui3.7.2/build/cssgrids/cssgrids-min.css">
+
+    <link rel="stylesheet" href="main-min.css">
+    <link rel="stylesheet" href="prettify-min.css">
+    <link rel="stylesheet" href="docs-min.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta http-equiv="X-XRDS-Location" content="/xrds.xml">
+	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+
+	<script src="yui3.7.2/build/yui/yui-min.js"></script-->
+
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.7.2/build/cssgrids/cssgrids-min.css">
 
@@ -30,20 +42,21 @@
 		}
 	
 		#mainLayout {
-			width: 800px;
-			min-width: 800px;
+			width: 850px;
+			min-width: 850px;
 			height: auto;
 			margin: 0px auto;
 		}
 		
 		#mainLayout #toolBox {
-			width: 140px;
+			width: 120px;
 			height: 100%;
-			min-height: 350px;
+			min-height: 395px;
 			border-bottom: 1px shadow #dcdcdc;
 			float: left;
 			display: inline-block;
-			margin: 0 10px 0 0;
+			margin: 0 5px 0 0;
+			position: relative;
 		}
 		
 		ul, li {
@@ -55,17 +68,19 @@
 		
 		li {
 			float: left;
-			margin: 0px 10px;
+			margin: 0px 5px;
 			cursor: pointer;
 		}
 		
 		ul#toolList {
 			float: left;
-			margin: 13px 5%;
+			margin: 13px 1%;
 		}
 		
 		ul#actionItems {
-			margin: 75% 0 0 15px;
+			position: absolute;
+			left: 5px;
+			top: 76%;
 		}
 				
 		li.yardEl {
@@ -109,18 +124,18 @@
 		}
 		
 		.dockPanel {
-			width: 16%; height: 344px; float: left; display: inline-block; background-color: #ececec;
+			width: 135px; min-height: 344px; float: left; display: inline-block; background-color: #ececec; height: 100%;
 		}
 		
 		.yardPanel {
-			float: left; display: inline-block; width: 20%; height: 344px;
+			float: left; display: inline-block; width: 130px; min-height: 344px; height: 100%;
 			background-color: #ececec;
 		}
 		
 		#internal {
 			background-image: url(images/sortcenter.png);
 			width: 172px;
-			height: 344px;
+			min-height: 344px;
 			display: inline-block;
 			float: left;
 			background-color: #ececec;
@@ -146,7 +161,7 @@
 		}
 		
 		#layout {
-			border: 1px solid; width: 640px; float: left; display: inline-block;
+			border: 1px solid; width: 705px; resize: both; overflow: hidden;
 		}
 		
 		#building {
@@ -159,6 +174,22 @@
 			position: relative;
 			top: 25%;
 			font-weight: bold;
+		}
+		
+		.hide {
+			display: none;
+		}
+
+		.show {
+			display: inline-block;
+		}
+		
+		.ydslots {
+			border:1px solid; width: 120px; height: 65px; clear: both; float: left; display: inline-block;
+		}
+		
+		#yard-slots {
+			min-width: 95px; float: right; display: inline-block; margin-left: 10px;
 		}
 	</style>
 </head> 
@@ -182,24 +213,171 @@
 	</div>
 	<div id="layout">
 		<div id="building">
-			<ul class="yardPanel slot" id="y1"></ul>
-			<ul class="dockPanel slot" id="d1"></ul>
+			<ul class="yardPanel slot" id="y1">
+				<li>
+					<ul class="ydslots" id="yl1"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="yl2"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="yl3"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="yl4"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="yl5"></ul>
+				</li>
+			</ul>
+			<ul class="dockPanel slot" id="d1">
+				<li>
+					<ul class="ydslots" id="dl1"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="dl2"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="dl3"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="dl4"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="dl5"></ul>
+				</li>
+			</ul>
 			<div id="internal">
 			</div>
-			<ul class="dockPanel slot" id="d2"></ul>
-			<ul class="yardPanel slot" id="y2"></ul>
+			<ul class="dockPanel slot" id="d2">
+				<li>
+					<ul class="ydslots" id="dr1"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="dr2"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="dr3"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="dr4"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="dr5"></ul>
+				</li>
+			</ul>
+			<ul class="yardPanel slot" id="y2">
+				<li>
+					<ul class="ydslots" id="yr1"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="yr2"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="yr3"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="yr4"></ul>
+				</li>
+				<li>
+					<ul class="ydslots" id="yr5"></ul>
+				</li>
+			</ul>
 			<div class="clearDiv" style="height: 0px;"></div>
 		</div>
 		<div class="clearDiv" style="height: 0px;"></div>
 	</div>
+	<!-- Panel to Move/Delete the added Yard/Dock on Tap Action -->
+	<div id="dropModEl" class="hide" style="position: relative; left: 10px; top: 10px; background-color: #ececec; border: 1px solid #acacac; z-index: 10; padding: 5px;">
+		<span id="closeBtn" style="float: right; width: 15px; height: 15px; cursor: pointer;">X</span>
+		<ul>
+			<li style="clear: both; float: left; display: inline-block; margin: 0 5px; line-height: 22px; width: 120px;">
+				<input type="radio" name="dropElModCtrl" id="dropElMove" value="move" style="margin: 0px 5px;" />
+				<label for="dropElMove">Move To</label>
+				<div class="clearDiv"></div>
+				<select id="yard-slots" class="show">
+				</select>
+			</li>
+			<li style="clear: both; float: left; display: inline-block; margin: 0 5px; line-height: 22px; width: 120px;">
+				<input type="radio" name="dropElModCtrl" id="dropElDel" value="del" style="margin: 0px 5px;"/>
+				<label for="dropElDel">Remove</label>
+			</li>
+		</ul>
+		<div class='clearDiv'></div>
+		<div class="actionBtns">
+			<button id="okBtn" name="okBtn">OK</button>
+			<button id="cancelBtn" name="cancelBtn">Cancel</button>
+		</div>
+	</div>
 	<div class="clearDiv" style="height: 0px;"></div>
 </div>
 <script type="text/javascript">
-YUI().use('dd-drop', 'dd-proxy', 'dd-constrain', function(Y) {
+YUI({
+	groups: {
+		jq: {
+			base: './',
+			modules: {
+				jquery: {
+					path: 'jquery-1.8.2.min.js'
+				}
+			}
+		}
+	}
+}).use('dd-drop', 'dd-proxy', 'dd-constrain', 'event-tap', 'jquery', 'event-simulate', function(Y, result) {
+	var _this = this;
+
+	/**
+	 * Event handler for tap event for all the added yards/docks elements
+	 */
+	Y.one("#building").delegate("tap", function(e) {
+		var clickNode = e.target,
+			dropModEl = Y.one("#dropModEl"),
+			clickXY = e.target.getXY();
+		clickXY[0] = clickXY[0] + 20,
+		clickXY[1] = clickXY[1] + 10;
+		if ((e.target._node.tagName).toLowerCase() !== "span") {
+			var slotsList = clickNode.ancestor("ul.slot").all("li ul"),
+				slotHTML = "";
+			Y.each(slotsList, function(v, k){
+				slotHTML = slotHTML + "<option value='" + v.get('id') + "'>" + v.get('id') + "</option>";
+			});
+			Y.one("#yard-slots").empty();
+			Y.one("#yard-slots").append(slotHTML);
+			dropModEl.toggleClass("hide").toggleClass("show");
+			dropModEl.setXY(clickXY);
+			_this.dropEL = clickNode._node.id;
+		}
+	}, "ul li.dropEl");
 	
-	Y.one("#mainLayout").delegate("click", function(){
+	/**
+	 * Event handler to close the small edit popup for yards/docks
+	 */
+	Y.one("#mainLayout").delegate("tap", function(e){
+		Y.one("#dropModEl").toggleClass("show").toggleClass("hide");
+	}, "#dropModEl #closeBtn, #dropModEl #cancelBtn");
+	
+	Y.one("#mainLayout").delegate("tap", function(){
 		document.location = "/srujan12/first/firstLayout.html";
-	}, "#resetBtn");
+	}, "#resetBtn");	
+
+	/**
+	 * Event handler for Delete actions on added yards/docks
+	 */
+	Y.one("#mainLayout").delegate("tap", function (e) {
+		var modType = Y.one("input[name='dropElModCtrl']:checked").get('value'),
+			targetEL = Y.one("#" + _this.dropEL);
+		if (modType != "move") {
+			targetEL.remove();
+		} else {
+			var destULEl = Y.one("#" + $("select#yard-slots option:selected").val());
+			if (destULEl.hasChildNodes()) {
+				destULEl.empty();
+			}
+			destULEl.appendChild(Y.one("#" + _this.dropEL));
+		}
+		Y.one("#dropModEl").toggleClass("show").toggleClass("hide");
+	}, "#dropModEl #okBtn");
+	
 
     var slots = Y.one('#mainLayout').all('.slot');
     Y.each(slots, function(v, k) {
@@ -255,27 +433,62 @@ YUI().use('dd-drop', 'dd-proxy', 'dd-constrain', function(Y) {
         });
         drag.on('drag:drophit', function(e) {
             var xy = e.drop.get('node').getXY();
-			//Create a new node and drop the same to yardPanel
+			var dropELIdentifier = (e.drop.get('node')._node.id).substr(1),
+				placeId = "";
+			if (dropELIdentifier != 1) {
+				placeId = "R";
+			} else {
+				placeId = "L";
+			}
+			//Create a new node and drop the same to yardPanel/dockPanel
 			var newNode = this.get('node').cloneNode(),
-				childELs = e.drop.get('node').all("li");
-			var newCnt = childELs.size() + 1;
+				childELs = e.drop.get('node').all("li ul"),
+				targetUL = e.drop.get('node').one("li ul"),
+				targetFlag = false;
+			Y.each(childELs, function (v, k) {
+				_this.lastULId = parseInt(((v.get('id')).substr(2)), 10);
+				if (!v.hasChildNodes() && !targetFlag) {
+					targetUL = v;
+					targetFlag = true;
+				}
+			});
+			/**
+			 * Check if all predefined slots are over or not, if all already allocated then add the new one upon user acceptance
+			 */
+			if (!targetFlag) {
+				var ulId = "";
+				if (this.get('node').hasClass("dockEl")) {
+					ulId = "d" + placeId.toLowerCase() + (_this.lastULId + 1);
+				} else {
+					ulId = "y" + placeId.toLowerCase() + (_this.lastULId + 1);
+				}
+				var ulElement = "<li><ul class='ydslots' id='" + ulId + "'></ul></li>";
+				e.drop.get('node').append(ulElement);
+				targetUL = Y.one("ul#" + ulId);
+			}
+			
+			var newCnt = (targetUL._node.id).toUpperCase();
+			//var newCnt = childELs.size() + 1;
 			if (this.get('node').hasClass("dockEl")) {
-				newNode.set("id", "DD-" + newCnt);
+				newNode.set("id", "DD-" + placeId + "-" + newCnt);
 				newNode.setStyles({
 					color: "#000000",
-					margin: "5px 0",
+					margin: "0px",
 					width: "102px"
 				});
-				newNode.setHTML("<span class='ydText'>DD-" + newCnt + "</span>");
+				newNode.setHTML("<span class='ydText' contenteditable='true'>DD-" + placeId + "-" + newCnt + "</span>");
 			} else {
-				newNode.set("id", "YY-" + newCnt);				
-				newNode.setHTML("<span class='ydText'>YY-" + newCnt + "</span>");
+				newNode.set("id", "YY-" + placeId + "-" + newCnt);				
+				newNode.setStyles({
+					margin: "10px"
+				});
+				newNode.setHTML("<span class='ydText' contenteditable='true'>YY-" + placeId + "-" + newCnt + "</span>");
 			}
-			newNode.setAttribute("contenteditable", true);
+			//newNode.setAttribute("contenteditable", true);
 			newNode.setStyles({
 				opacity: 1
 			});
-			e.drop.get('node').appendChild(newNode);
+			targetUL.appendChild(newNode);
         });
         drag.on('drag:dropmiss', function(e) {
             if (this._playerStart) {
