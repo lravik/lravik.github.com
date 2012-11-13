@@ -37,6 +37,7 @@ p {padding-bottom:25px}
 /* ============================= header ====================== */
 header {width:270px;float:left}
 #logo {display:inline-block;text-indent:-9999px;width:270px;height:250px;}
+/*
 #logo img {
 	transition: transform 4s ease 0s;
 	display: inline-block;
@@ -46,6 +47,7 @@ header {width:270px;float:left}
     transform: rotateY(360deg);
     transition: transform 4s ease 0s;
 }
+*/
 /*#menu  {padding-top:53px}*/
 #menu > li  {width:100%;overflow:hidden;padding-bottom:3px}
 #menu > li > a {display:inline-block;font-size:21px;line-height:46px;color:#434343;background:#000;text-decoration:none;position:relative;letter-spacing:-1px;width: 100%;}
