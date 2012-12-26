@@ -106,16 +106,16 @@ a.social_icons:hover {
 }
 
 a#fbLink {
-	background-image: url("icon1.jpg");
+	background-image: url("../images/icon1.jpg");
 }
 a#twLink {
-	background-image: url("icon2.jpg");
+	background-image: url("../images/icon2.jpg");
 }
 a#lnLink {
-	background-image: url("icon3.jpg");
+	background-image: url("../images/icon3.jpg");
 }
 a#deliLink {
-	background-image: url("icon4.jpg");
+	background-image: url("../images/icon4.jpg");
 }
 
 /* Tooltips */
