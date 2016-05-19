@@ -1,0 +1,81 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Layout Manager - Landing Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=960" id="meta-viewport">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script>
+    if (screen.width < 768) {
+        document.getElementById('meta-viewport').setAttribute('content', 'width=768');
+    }
+    </script>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.7.2/build/cssgrids/cssgrids-min.css">
+
+    <link rel="stylesheet" href="http://yuilibrary.com/combo/css?main-min.css">
+    <link rel="stylesheet" href="http://yuilibrary.com/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="http://yuilibrary.com/css/docs-min.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta http-equiv="X-XRDS-Location" content="/xrds.xml">
+	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">	
+	<style type="text/css">
+		h1, h2, h3, h4, h5 {
+			font-family: Myriad Pro;
+			font-weight: normal;
+			line-height: 5px;
+		}
+	
+		#mainLayout {
+			width: 768px;
+			height: 480px;
+			margin: 0px auto;
+		}
+		
+		.clearDiv {
+			clear: both;
+			height: 1px;
+		}
+		
+		a {
+			text-decoration: none;
+		}		
+					
+		#actionSelect {
+			width: auto;
+			height: auto;
+			text-align: center;
+		}
+		
+		a#createBtn {
+			background-image: url(images/createlayout.png);
+			width: 307px;
+			height: 64px;
+			display: inline-block;
+		}
+		
+		a#modifyBtn {
+			background-image: url(images/Modify.png);
+			width: 307px;
+			height: 64px;
+			display: inline-block;
+		}
+	</style>
+</head> 
+<body class="yui3-skin-sam"> 
+
+<div id="mainLayout">
+	<div id="scHd">
+		<h5>Layout Manager Tool</h5>
+		<h1>Select Layout</h1>
+	</div>
+	<div class="clearDiv" style="height: 20px;"></div>
+	<div id="actionSelect">
+		<div class="clearDiv" style="height: 5px;"></div>
+		<a href="newpage.html" id="createBtn"></a>
+		<div class="clearDiv" style="height: 10px;"></div>
+		<a href="editpage.html" id="modifyBtn"></a>	
+	</div>
+</div>
+</body>
+</html>

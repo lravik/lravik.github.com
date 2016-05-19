@@ -1,0 +1,287 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Layout Manager - Layout Modification</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=960" id="meta-viewport">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script>
+    if (screen.width < 768) {
+        document.getElementById('meta-viewport').setAttribute('content', 'width=768');
+    }
+    </script>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.7.2/build/cssgrids/cssgrids-min.css">
+
+    <link rel="stylesheet" href="http://yuilibrary.com/combo/css?main-min.css">
+    <link rel="stylesheet" href="http://yuilibrary.com/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="http://yuilibrary.com/css/docs-min.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta http-equiv="X-XRDS-Location" content="/xrds.xml">
+	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+
+	<script src="http://yui.yahooapis.com/3.7.2/build/yui/yui-min.js"></script>
+	
+	<style type="text/css">
+		h1, h2, h3, h4, h5 {
+			font-family: Myriad Pro;
+			font-weight: normal;
+			line-height: 5px;
+		}
+	
+		#mainLayout {
+			width: 800px;
+			min-width: 800px;
+			height: auto;
+			margin: 0px auto;
+			border: 1px dotted;
+		}
+		
+		#mainLayout #toolBox {
+			width: 140px;
+			height: 100%;
+			min-height: 350px;
+			border-bottom: 1px shadow #dcdcdc;
+			float: left;
+			display: inline-block;
+			margin: 0 10px 0 0;
+		}
+		
+		ul, li {
+			list-style-type: none;
+			margin: 0px;
+			padding: 0px;
+			display: inline-block;
+		}
+		
+		li {
+			float: left;
+			margin: 0px 10px;
+			cursor: pointer;
+		}
+		
+		ul#toolList {
+			float: left;
+			margin: 13px 5%;
+		}
+		
+		ul#actionItems {
+			margin: 75% 0 0 15px;
+		}
+				
+		li.yardEl {
+			background-image: url(images/yard_n.png);
+			width: 105px;
+			height: 48px;
+			display: inline-block;
+			text-align: center;
+		}
+		
+		li.dockEl {
+			background-image: url(images/dockdoor.png);
+			width: 102px;
+			height: 65px;
+			display: inline-block;
+			text-align: center;
+		}
+		
+		li.dockEl span {
+			top: 35%;
+		}
+		
+		li.btns {
+			width: 100px;
+			height: 43px;
+			margin: 5px 0;
+		}
+		
+		li#editBtn {
+			background-image: url(images/export_btn.png);
+		}
+		
+		li#resetBtn {
+			background-image: url(images/reset_btn.png);
+			background-repeat: no-repeat;
+		}
+		
+		.clearDiv {
+			clear: both;
+			height: 1px;
+		}
+		
+		.dockPanel {
+			width: 16%; height: 344px; float: left; display: inline-block; background-color: #ececec;
+		}
+		
+		.yardPanel {
+			float: left; display: inline-block; width: 20%; height: 344px;
+			background-color: #ececec;
+		}
+		
+		#internal {
+			background-image: url(images/sortcenter.png);
+			width: 172px;
+			height: 344px;
+			display: inline-block;
+			float: left;
+			background-color: #ececec;
+		}
+		
+		#mainLayout .yui3-dd-drop-active-valid {
+		    background-color: #ffffcc;
+		}
+		#mainLayout .yui3-dd-drop-over {
+		    background-color: #ffffcc;
+		}
+		
+		#building ul li {
+			margin: 5px;
+		}
+		
+		#building #d1 li {
+			float: right;
+		}
+		
+		#layout {
+			border: 1px solid; width: 640px; float: left; display: inline-block;
+		}
+		
+		#building {
+			width: 100%;
+			padding-top: 10px;
+			background-color: #ececec;
+		}
+		
+		span.ydText {
+			position: relative;
+			top: 25%;
+			font-weight: bold;
+		}
+	</style>
+</head> 
+<body class="yui3-skin-sam"> 
+
+<div id="mainLayout">
+	<div id="scHd">
+		<h5>Layout Manager Tool</h5>
+		<h1>Manage Yards/Docks</h1>
+	</div>
+	<div class="clearDiv" style="height: 20px;"></div>
+	<div id="toolBox">
+		<ul id="toolList">
+			<li id="yard" class="dropEl yardEl"><span class="ydText">Yard Slot</span></li>
+			<li id="dock" class="dropEl dockEl"><span class="ydText">Dock Door</span></li>
+		</ul>	
+		<ul id="actionItems">
+			<li id="editBtn" class="btns"></li>
+			<li id="resetBtn" class="btns"></li>
+		</ul>
+	</div>
+	<div id="layout">
+		<div id="building">
+			<ul class="yardPanel slot" id="y1"></ul>
+			<ul class="dockPanel slot" id="d1"></ul>
+			<div id="internal">
+			</div>
+			<ul class="dockPanel slot" id="d2"></ul>
+			<ul class="yardPanel slot" id="y2"></ul>
+			<div class="clearDiv" style="height: 0px;"></div>
+		</div>
+		<div class="clearDiv" style="height: 0px;"></div>
+	</div>
+	<div class="clearDiv" style="height: 0px;"></div>
+</div>
+<script type="text/javascript">
+YUI().use('dd-drop', 'dd-proxy', 'dd-constrain', function(Y) {
+	
+	Y.one("#mainLayout").delegate("click", function(){
+		document.location = "/srujan12/first/firstLayout.html";
+	}, "#resetBtn");
+
+    var slots = Y.one('#mainLayout').all('.slot');
+    Y.each(slots, function(v, k) {
+        var id = v.get('id'), groups = ['two'];
+        switch (id) {
+            case 'y1':
+            case 'y2':
+                groups = ['one'];
+                break;
+        }
+        var drop = new Y.DD.Drop({
+            node: v,
+            groups: groups
+        });
+    });
+
+    var dropElements = Y.one('#mainLayout').all('.dropEl');
+    Y.each(dropElements, function(v, k) {
+        var id = v.get('id'), groups = ['one', 'two'];
+        switch (id) {
+            case 'yard':
+                groups = ['one'];
+                break;
+            case 'dock':
+                groups = ['two'];
+                break;
+        }
+        var drag = new Y.DD.Drag({
+            node: v,
+            groups: groups
+        }).plug(Y.Plugin.DDProxy, {
+            moveOnEnd: false
+        }).plug(Y.Plugin.DDConstrained, {
+            constrain2node: '#mainLayout'
+        });
+        drag.on('drag:start', function() {
+            var p = this.get('dragNode'),
+                n = this.get('node');
+                n.setStyle('opacity', .25);
+                if (!this._playerStart) {
+                    this._playerStart = this.nodeXY;
+                }
+            p.set('innerHTML', n.get('innerHTML'));
+            p.setStyles({
+                backgroundColor: n.getStyle('backgroundColor'),
+                color: n.getStyle('color'),
+                opacity: .65
+            });
+        });
+        drag.on('drag:end', function() {
+            var n = this.get('node');
+            n.setStyle('opacity', '1');
+        });
+        drag.on('drag:drophit', function(e) {
+            var xy = e.drop.get('node').getXY();
+			//Create a new node and drop the same to yardPanel
+			var newNode = this.get('node').cloneNode(),
+				childELs = e.drop.get('node').all("li");
+			var newCnt = childELs.size() + 1;
+			if (this.get('node').hasClass("dockEl")) {
+				newNode.set("id", "DD-" + newCnt);
+				newNode.setStyles({
+					color: "#000000",
+					margin: "5px 0",
+					width: "100px"
+				});
+				newNode.setHTML("<span class='ydText'>DD-" + newCnt + "</span>");
+			} else {
+				newNode.set("id", "YY-" + newCnt);				
+				newNode.setHTML("<span class='ydText'>YY-" + newCnt + "</span>");
+			}
+			newNode.setAttribute("contenteditable", true);
+			newNode.setStyles({
+				opacity: 1
+			});
+			e.drop.get('node').appendChild(newNode);
+        });
+        drag.on('drag:dropmiss', function(e) {
+            if (this._playerStart) {
+                this.get('node').setXY(this._playerStart, Y.UA.ie);
+                this._playerStart = null;
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
